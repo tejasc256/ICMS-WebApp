@@ -1,8 +1,17 @@
 var express = require('express');
 var router = express.Router();
 
-var policyController = require('../controller/policyController');
+var auth = function(req, res, next) {
+    if(req.session && req.session.mgr_id){
+        return next();
+    }
+    else{
+        res.sendStatus(401);
+    }
+};
 
+var policyController = require('../controller/policyController');
+router.get('/buy/:pid',auth,policyController.buy_policy);
 router.get('/', policyController.list_all_policies);
 router.post('/', policyController.create_a_policy);
 

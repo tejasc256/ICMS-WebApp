@@ -2,6 +2,8 @@
 
 var Policy = require('../model/policyModel');
 
+var sql = require('../model/db');
+
 exports.list_all_policies = function(req, res) {
     Policy.getAllPolicy(function(err, policy) {
 
@@ -10,6 +12,18 @@ exports.list_all_policies = function(req, res) {
         res.send(err);
         console.log('res', policy);
         res.send(policy);
+    });
+};
+
+exports.buy_policy = function(req, res) {
+    sql.query("insert into requests(cid, pid, type) values (?,?,?)", [req.session.cid,req.params.pid,req.params.type], function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
     });
 };
 

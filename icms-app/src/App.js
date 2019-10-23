@@ -39,6 +39,7 @@ class App extends Component {
                 <Route path = "/add" component = {AddCustomer}/>
                 <Route path = "/policies" component = {ViewPolicies}/>
                 <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
+                <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
                     </div>
 
             </Router>
