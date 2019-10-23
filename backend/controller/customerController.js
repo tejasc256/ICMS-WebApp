@@ -2,6 +2,8 @@
 
 var Customer = require('../model/customerModel');
 
+var sql = require('../model/db');
+
 exports.list_all_customers = function(req, res) {
   Customer.getAllCustomer(function(err, customer) {
 
@@ -63,4 +65,17 @@ exports.delete_a_customer = function(req, res) {
       res.send(err);
     res.json({ message: 'Customer successfully deleted' });
   });
+};
+
+exports.view_customer_policies = function(req, res) {
+    sql.query("select * from policy where pid in (select pid from requests where rid in (select rid from agent_requests) and cid = ?);", req.session.cid, function(err, result) {
+        console.log('My Policies');
+        if (err){
+            res.send(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
 };
