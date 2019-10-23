@@ -26,6 +26,9 @@ var policyRouter = require('./routes/policyRouter');
 var requestRouter = require('./routes/requestRouter');
 var attributesRouter = require('./routes/attributesRouter');
 var loginRouter = require('./routes/loginRouter');
+var claimRouter = require('./routes/claimRouter');
+var managerRouter = require('./routes/managerRouter');
+var ceoRouter = require('./routes/ceoRouter');
 
 app.use('/customer', customerRouter);
 app.use('/agent', agentRouter);
