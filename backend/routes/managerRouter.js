@@ -12,7 +12,7 @@ var auth = function(req, res, next) {
     }
 };
 
-router.get('/agents', auth , function(req, res) {
+router.get('/', auth , function(req, res) {
     sql.query("select * from agents where mgr_id = ?", req.session.mgr_id, function(err , result) {
         if(err){
             console.log(err);
@@ -35,3 +35,5 @@ router.post('/', function(req, res) {
         }
     });
 });
+
+module.exports = router;

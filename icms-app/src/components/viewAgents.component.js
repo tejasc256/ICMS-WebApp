@@ -22,7 +22,7 @@ export default class OtherPage extends  Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/manager/agents')
+        axios.get('http://localhost:4000/manager')
             .then(response => {
                 this.setState({ agents: response.data });
             })

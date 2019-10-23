@@ -3,7 +3,7 @@ var router = express.Router();
 
 var sql = require('../model/db');
 
-router.get('/managers', function(req, res) {
+router.get('/', function(req, res) {
     sql.query("select * from manager", function(err , result) {
         if(err){
             console.log(err);
@@ -14,3 +14,5 @@ router.get('/managers', function(req, res) {
         }
     });
 });
+
+module.exports = router;

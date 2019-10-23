@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const PORT = 4000;
+const PORT = 3000;
 const mysql = require('mysql');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
@@ -36,6 +36,9 @@ app.use('/policy', policyRouter);
 app.use('/request', requestRouter);
 app.use('/attribute', attributesRouter);
 app.use('/login', loginRouter);
+app.use('/manager',managerRouter);
+app.use('/claims',claimRouter); 
+app.use('/ceo',ceoRouter);
 
 // This line should be AFTER all routes
 app.get('*', function(req, res) {
