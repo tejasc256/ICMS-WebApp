@@ -3,14 +3,26 @@
 var Policy = require('../model/policyModel');
 
 exports.list_all_policies = function(req, res) {
-    Policy.getAllPolicy(function(err, policy) {
 
-        console.log('controller')
-        if (err)
-        res.send(err);
-        console.log('res', policy);
-        res.send(policy);
-    });
+    if(req.session && req.session.cid){
+        Policy.getAllPolicy(req.session.cid, function(err, policy) {
+            console.log('Policies with cid');
+            if (err)
+            res.send(err);
+            console.log('res', policy);
+            res.send(policy);
+        });
+    }
+    else{
+        Policy.getAllPolicy(-1, function(err, policy) {
+
+            console.log('Policies without cid');
+            if (err)
+            res.send(err);
+            console.log('res', policy);
+            res.send(policy);
+        });
+    }
 };
 
 exports.create_a_policy = function(req, res) {
