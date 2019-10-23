@@ -3,6 +3,16 @@ var router = express.Router();
 
 var claimController = require('../controller/claimController');
 
+var auth = function(req, res, next) {
+    if(req.session && req.session.cid){
+        return next();
+    }
+    else{
+        res.sendStatus(401);
+    }
+};
+
+router.post('/create', auth, claimController.make_a_claim);
 router.get('/', claimController.list_all_claims);
 router.post('/', claimController.create_a_claim);
 

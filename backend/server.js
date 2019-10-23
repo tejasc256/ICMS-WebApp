@@ -26,6 +26,7 @@ var policyRouter = require('./routes/policyRouter');
 var requestRouter = require('./routes/requestRouter');
 var attributesRouter = require('./routes/attributesRouter');
 var loginRouter = require('./routes/loginRouter');
+var claimRouter = require('./routes/claimRouter');
 
 app.use('/customer', customerRouter);
 app.use('/agent', agentRouter);
@@ -33,6 +34,7 @@ app.use('/policy', policyRouter);
 app.use('/request', requestRouter);
 app.use('/attribute', attributesRouter);
 app.use('/login', loginRouter);
+app.use('/claim', claimRouter);
 
 // This line should be AFTER all routes
 app.get('*', function(req, res) {

@@ -2,6 +2,8 @@
 
 var Claim = require('../model/claimModel');
 
+var sql = require('../model/db');
+
 exports.list_all_claims = function(req, res) {
     Claim.getAllClaims(function(err, claim) {
 
@@ -46,3 +48,15 @@ exports.delete_a_claim = function(req, res) {
         res.json({ message: 'Claim successfully deleted' });
     });
 };
+
+exports.make_a_claim = function(req, res) {
+    sql.query('insert into claims(cid, pid, aid, amount) values(?,?,?,?)', [req.session.cid, req.body.pid, req.body.aid, req.body.amount], function(err, result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.json(result.insertId);
+        }
+    });
+}
