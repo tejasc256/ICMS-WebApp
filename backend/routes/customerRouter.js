@@ -18,7 +18,7 @@ router.get('/:cid', customerController.read_a_customer);
 router.put('/:cid', customerController.update_a_customer);
 router.delete('/:cid', customerController.delete_a_customer);
 router.post('/addmoney', auth, function(req, res) {
-    sql.query("update customer set balance=? where cid=?", [req.body.new_balance,req.session.cid], function(err , result) {
+    sql.query("update customer set balance=balance + ? where cid=?", [req.body.addedmoney,req.session.cid], function(err , result) {
         if(err){
             console.log(err);
             throw err;
