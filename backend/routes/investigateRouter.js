@@ -12,8 +12,8 @@ var auth = function(req, res, next) {
     }
 };
 
-router.get('/', auth , function(req, res) {
-    sql.query("select * from agents where mgr_id = ?", req.session.mgr_id, function(err , result) {
+router.post('/:claim_id',auth, function(req, res) {
+    sql.query("insert into investigates values (?,?)", [req.session.inv_id, req.body.claim_id], function(err , result) {
         if(err){
             console.log(err);
             throw err;
@@ -23,7 +23,5 @@ router.get('/', auth , function(req, res) {
         }
     });
 });
-
-
 
 module.exports = router;
