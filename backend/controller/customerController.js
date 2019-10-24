@@ -79,3 +79,15 @@ exports.view_customer_policies = function(req, res) {
         }
     });
 };
+
+exports.view_customer_claims = function(req, res) {
+    sql.query("select c.claim_id, p.name as pname, c.amount, a.name as aname from claims c inner join policy p on c.pid = p.pid inner join policy_attributes a on a.aid = c.aid where c.cid = ?;", req.session.cid, function(err, result) {
+        if(err){
+            res.send(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+};

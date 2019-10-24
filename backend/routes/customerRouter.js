@@ -13,6 +13,7 @@ var auth = function(req, res, next) {
 };
 
 router.get('/policies', auth, customerController.view_customer_policies);
+router.get('/claims', auth, customerController.view_customer_claims);
 
 router.get('/', customerController.list_all_customers);
 router.post('/', customerController.create_a_customer);
