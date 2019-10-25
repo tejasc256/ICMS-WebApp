@@ -13,6 +13,7 @@ exports.list_all_agents = function(req, res) {
     });
 };
 
+
 exports.create_a_agent = function(req, res) {
     var new_agent = new Agent(req.body);
 

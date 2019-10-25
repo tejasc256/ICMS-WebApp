@@ -50,6 +50,7 @@ Agent.getAllAgent = function (result) {
                 }
             });
 };
+
 Agent.remove = function(id, result){
      sql.query("DELETE FROM agent WHERE agent_id = ?", [id], function (err, res) {
 
