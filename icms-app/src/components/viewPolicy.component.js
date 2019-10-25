@@ -25,19 +25,21 @@ export default class ViewPolicy extends Component {
             name: '',
             premium: '',
             duration: '',
+            type: '',
             attributes: []
         }
 
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/policy/'+this.props.match.params.pid)
+        axios.get('http://localhost:4000/policy/'+this.props.match.params.pid, {withCredentials: true})
             .then(response => {
                 this.setState({
                     pid: response.data[0].pid,
                     name: response.data[0].name,
                     premium: response.data[0].premium,
-                    duration: response.data[0].duration
+                    duration: response.data[0].duration,
+                    type: response.data[0].type
                 })
             })
             .catch(function (error) {
@@ -53,18 +55,15 @@ export default class ViewPolicy extends Component {
     }
 
     onSubmit(e) {
-        // e.preventDefault();
-        // const obj = {
-        //     pid: this.state.pid,
-        //     name: this.state.name,
-        //     duration: this.state.duration,
-        //     todo_completed: this.state.todo_completed
-        // };
-        // console.log(obj);
-        // axios.post('http://localhost:4000/todos/update/'+this.props.match.params.id, obj)
-        //     .then(res => console.log(res.data));
+        e.preventDefault();
 
-        this.props.history.push('/');
+        axios.post('http://localhost:4000/request', {pid: this.state.pid, type: this.state.type}, {withCredentials: true})
+        .then(response => {
+            this.props.history.push("/dashboard");
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
     }
 
     attributesList(){

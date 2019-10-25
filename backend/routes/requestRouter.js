@@ -3,6 +3,15 @@ var router = express.Router();
 
 var sql = require('../model/db');
 
+var auth = function(req, res, next) {
+    if(req.session && req.session.cid){
+        return next();
+    }
+    else{
+        res.send("AuthFail");
+    }
+};
+
 var Request = function(a){
     this.cid =  a.cid;
     this.pid = a.pid;
@@ -47,8 +56,8 @@ router.get('/', function(req, res) {
     }
 });
 
-router.post('/', function(req, res) {
-    sql.query("insert into requests(cid, pid, type) values (?,?,?)", [req.body.cid, req.body.pid, req.body.type], function(err , result) {
+router.post('/', auth, function(req, res) {
+    sql.query("insert into requests(cid, pid, type) values (?,?,?)", [req.session.cid, req.body.pid, req.body.type], function(err , result) {
         if(err){
             console.log(err);
             throw err;

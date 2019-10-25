@@ -19,15 +19,16 @@ exports.create_a_customer = function(req, res) {
   var new_customer = new Customer(req.body);
 
   console.log(new_customer);
+  console.log(req.session.cid);
   //handles null error
-   if(!new_customer.cid || !new_customer.firstname || !new_customer.lastname ||!new_customer.branch || !new_customer.dob ){
+   if(!new_customer.firstname || !new_customer.lastname ||!new_customer.branch || !new_customer.dob ){
 
             res.status(400).send({ error:true, message: 'Please provide all information' });
 
         }
 else{
 
-  Customer.createCustomer(new_customer, function(err, customer) {
+  Customer.createCustomer(new_customer, req.session.cid, function(err, customer) {
 
     if (err)
       res.send(err);
@@ -100,6 +101,21 @@ exports.view_customer_profile = function(req, res) {
             throw err;
         }
         else{
+            res.send(result);
+        }
+    });
+};
+
+exports.create_customer_email = function(req, res) {
+    sql.query("insert into customer_login(email, password) values (?, ?);", [req.body.email, req.body.password], function(err, result) {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        else{
+            console.log(result.insertId);
+            req.session.cid = result.insertId;
+            req.session.customer = true;
             res.send(result);
         }
     });
