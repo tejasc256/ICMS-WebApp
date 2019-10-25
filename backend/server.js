@@ -7,18 +7,18 @@ const mysql = require('mysql');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true
+}));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use(session({
     secret: 'randomshit',
-    resave: true,
-    saveUninitialized: true
+    resave: false,
+    saveUninitialized: false,
 }));
-
-// connect to database
-// const mc = require('./model/db');
 
 var customerRouter = require('./routes/customerRouter');
 var agentRouter = require('./routes/agentRouter');
@@ -37,6 +37,7 @@ app.use('/policy', policyRouter);
 app.use('/request', requestRouter);
 app.use('/attribute', attributesRouter);
 app.use('/login', loginRouter);
+app.use('/claim', claimRouter);
 app.use('/manager',managerRouter);
 app.use('/claims',claimRouter); 
 app.use('/ceo',ceoRouter);

@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import HomePage from "./components/home-page.component";
 import OtherPage from "./components/other-page.component";
-import AddCustomer from "./components/add-cust.component";
+import CustomerLogin from "./components/customerLogin.component";
 import ViewPolicies from "./components/viewPolicies.component"
 import ViewPolicy from "./components/viewPolicy.component";
+import CustomerDashboard from "./components/customerDashboard.component";
 import ViewClaims from "./components/viewClaims.component";
 import ViewManagers from "./components/viewManagers.component";
 import ViewAgents from "./components/viewAgents.component";
@@ -26,7 +27,7 @@ class App extends Component {
                 <Link to="/" className="nav-link">Home Page</Link>
                 </li>
                 <li className="navbar-item">
-                <Link to="/add" className="nav-link">Add customer</Link>
+                <Link to="/login" className="nav-link">Customer Login</Link>
                 </li>
                 <li className="navbar-item">
                 <Link to="/other" className="nav-link">List Customers</Link>
@@ -39,9 +40,10 @@ class App extends Component {
                 </nav>
                 <Route path = "/" exact component = {HomePage}/>
                 <Route path = "/other" component = {OtherPage}/>
-                <Route path = "/add" component = {AddCustomer}/>
+                <Route path = "/login" component = {CustomerLogin}/>
                 <Route path = "/policies" component = {ViewPolicies}/>
                 <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
+                <Route path = "/dashboard" component = {CustomerDashboard}/>
                 <Route path = "/claims" component = {ViewClaims}/>
                 <Route path = "/ceo" component = {ViewManagers}/>
                 <Route path = "/manager" component = {ViewAgents}/>

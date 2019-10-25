@@ -7,7 +7,7 @@ var auth = function(req, res, next) {
         return next();
     }
     else{
-        res.sendStatus(401);
+        res.send("AuthFail");
     }
 };
 
@@ -21,19 +21,32 @@ router.post('/customer', function(req, res) {
             if(result.length == 1){
                 console.log(result[0].cid);
                 req.session.cid = result[0].cid;
-                res.status(200);
-                res.send("Login Successful");
+                req.session.customer = true;
+                res.send("AuthPass");
             }
             else{
-                res.status(401);
-                res.send("Invalid Credentials");
+                res.send("AuthFail");
             }
         }
     });
 });
 
 router.get('/testpage', auth, function(req, res) {
-    res.send('Authenticated!' + req.session.cid);
+    if(req.session.customer){
+        sql.query("select firstname from customer where cid = ?", req.session.cid, function(err ,result) {
+            if(err){
+                throw err;
+                console.log(err);
+            }
+            else{
+                res.send('Welcome ' + result[0].firstname + ' !');
+            }
+        });
+    }
+    else{
+        res.send("AuthFail");
+    }
+
 });
 
 router.get('/logout', function(req, res) {

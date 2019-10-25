@@ -12,15 +12,17 @@ var auth = function(req, res, next) {
 };
 
 var auth = function(req, res, next) {
-    if(req.session && req.session.cid){
+    if(req.session.customer){
         return next();
     }
     else{
-        res.sendStatus(401);
+        res.send("AuthFail");
     }
 };
 
 router.get('/policies', auth, customerController.view_customer_policies);
+router.get('/claims', auth, customerController.view_customer_claims);
+router.get('/profile', auth, customerController.view_customer_profile);
 
 router.get('/', customerController.list_all_customers);
 router.post('/', customerController.create_a_customer);
