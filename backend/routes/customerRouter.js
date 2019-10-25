@@ -4,7 +4,7 @@ var router = express.Router();
 var customerController = require('../controller/customerController');
 
 var auth = function(req, res, next) {
-    if(req.session && req.session.cid){
+    if(req.session.customer){
         return next();
     }
     else{

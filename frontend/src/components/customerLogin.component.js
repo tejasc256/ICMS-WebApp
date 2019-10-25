@@ -42,9 +42,9 @@ export default class customerLogin extends  Component {
                     cust_email: response.data
                 });
             }
+        }).catch(function(err) {
+            console.log(err);
         });
-
-
     }
     render(){
         return (

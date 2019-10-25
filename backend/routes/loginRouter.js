@@ -21,6 +21,7 @@ router.post('/customer', function(req, res) {
             if(result.length == 1){
                 console.log(result[0].cid);
                 req.session.cid = result[0].cid;
+                req.session.customer = true;
                 res.send("AuthPass");
             }
             else{
@@ -31,7 +32,21 @@ router.post('/customer', function(req, res) {
 });
 
 router.get('/testpage', auth, function(req, res) {
-    res.send('Authenticated!' + req.session.cid);
+    if(req.session.customer){
+        sql.query("select firstname from customer where cid = ?", req.session.cid, function(err ,result) {
+            if(err){
+                throw err;
+                console.log(err);
+            }
+            else{
+                res.send('Welcome ' + result[0].firstname + ' !');
+            }
+        });
+    }
+    else{
+        res.send("AuthFail");
+    }
+
 });
 
 router.get('/logout', function(req, res) {
