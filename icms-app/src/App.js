@@ -7,6 +7,8 @@ import OtherPage from "./components/other-page.component";
 import AddCustomer from "./components/add-cust.component";
 import ViewPolicies from "./components/viewPolicies.component"
 import ViewPolicy from "./components/viewPolicy.component";
+import ViewClaims from "./components/viewClaims.component";
+import ViewManagers from "./components/viewManagers.component";
 
 class App extends Component {
     render(){
@@ -39,7 +41,8 @@ class App extends Component {
                 <Route path = "/add" component = {AddCustomer}/>
                 <Route path = "/policies" component = {ViewPolicies}/>
                 <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
-                <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
+                <Route path = "/claims" component = {ViewClaims}/>
+                <Route path = "/ceo" component = {ViewManagers}/>
                     </div>
 
             </Router>

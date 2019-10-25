@@ -4,8 +4,8 @@ var Claim = require('../model/claimModel');
 
 exports.list_all_claims = function(req, res) {
     Claim.getAllClaims(function(err, claim) {
-
-        console.log('controller')
+        
+        console.log('claim controller')
         if (err)
         res.send(err);
         console.log('res', claim);

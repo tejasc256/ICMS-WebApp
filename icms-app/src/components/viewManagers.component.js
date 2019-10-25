@@ -14,11 +14,11 @@ const Manager = props => (
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
-        this.state = {policies: []};
+        this.state = {managers: []};
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/ceo/managers')
+        axios.get('http://localhost:4000/ceo')
             .then(response => {
                 this.setState({ managers: response.data });
             })
