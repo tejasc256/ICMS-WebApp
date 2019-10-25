@@ -35,19 +35,36 @@ Policy.getPolicyById = function (policyId, result) {
                 }
             });
 };
-Policy.getAllPolicy = function (result) {
-        sql.query("Select * from policy", function (err, res) {
+Policy.getAllPolicy = function (cid, result) {
+        if(cid == -1){
+            sql.query("Select * from policy", function (err, res) {
 
-                if(err) {
-                    console.log("error: ", err);
-                    result(err, null);
-                }
-                else{
-                  console.log('policy : ', res);
+                    if(err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                    }
+                    else{
+                      console.log('policy : ', res);
 
-                 result(null, res);
-                }
-            });
+                     result(null, res);
+                    }
+                });
+        }
+        else{
+            sql.query("Select * from policy where pid not in (select pid from requests where cid = ?)",cid , function (err, res) {
+
+                    if(err) {
+                        console.log("error: ", err);
+                        result(err, null);
+                    }
+                    else{
+                      console.log('policy : ', res);
+
+                     result(null, res);
+                    }
+                });
+        }
+
 };
 Policy.remove = function(id, result){
      sql.query("DELETE FROM policy WHERE pid = ?", [id], function (err, res) {
