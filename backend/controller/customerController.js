@@ -91,3 +91,16 @@ exports.view_customer_claims = function(req, res) {
         }
     });
 };
+
+exports.view_customer_profile = function(req, res) {
+    sql.query("select * from customer where cid = ?", req.session.cid, function(err, result) {
+        if(err){
+            console.log(err);
+            res.send(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+};

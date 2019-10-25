@@ -7,7 +7,7 @@ var auth = function(req, res, next) {
         return next();
     }
     else{
-        res.sendStatus(401);
+        res.send("AuthFail");
     }
 };
 
@@ -21,12 +21,10 @@ router.post('/customer', function(req, res) {
             if(result.length == 1){
                 console.log(result[0].cid);
                 req.session.cid = result[0].cid;
-                res.status(200);
-                res.send("Login Successful");
+                res.send("AuthPass");
             }
             else{
-                res.status(401);
-                res.send("Invalid Credentials");
+                res.send("AuthFail");
             }
         }
     });
