@@ -21,9 +21,8 @@ export default class OtherPage extends  Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/customer/policies', {withCredentials: true})
+        axios.get('http://localhost:4000/policy/')
             .then(response => {
-                console.log(response.data);
                 this.setState({ policies: response.data });
             })
             .catch(function (error){
