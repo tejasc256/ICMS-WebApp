@@ -21,6 +21,7 @@ export default class OtherPage extends  Component {
     componentDidMount() {
         axios.get('http://localhost:4000/claims/')
             .then(response => {
+                console.log(response.data);
                 this.setState({ claims: response.data });
             })
             .catch(function (error){
@@ -31,7 +32,7 @@ export default class OtherPage extends  Component {
     claimList() {
         return this.state.claims.map(function(currentClaim, i){
             return (<Claim claim={currentClaim} key={i} />);
-            })
+            });
     }
 
     render(){
