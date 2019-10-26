@@ -59,7 +59,16 @@ export default class ViewPolicy extends Component {
 
         axios.post('http://localhost:4000/request', {pid: this.state.pid, type: this.state.type}, {withCredentials: true})
         .then(response => {
-            this.props.history.push("/dashboard");
+            console.log(response);
+            if(response.data === "AuthFail"){
+                this.props.history.push('/login');
+            }
+            else{
+                if(response.data.isSuccess === 0){
+                    alert('Please add sufficient money to your wallet');
+                }
+                this.props.history.push("/dashboard");
+            }
         })
         .catch(function(error) {
             console.log(error);

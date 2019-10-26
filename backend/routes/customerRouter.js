@@ -2,17 +2,10 @@ var express = require('express');
 var router = express.Router();
 var sql = require('../model/db');
 var customerController = require('../controller/customerController');
-var auth = function(req, res, next) {
-    if(req.session && req.session.mgr_id){
-        return next();
-    }
-    else{
-        res.sendStatus(401);
-    }
-};
+
 
 var auth = function(req, res, next) {
-    if(req.session.customer){
+    if(req.session.cid){
         return next();
     }
     else{

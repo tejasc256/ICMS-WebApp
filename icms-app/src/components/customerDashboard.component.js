@@ -18,7 +18,23 @@ export default class customerDashboard extends  Component {
         }
 
         this.userSignOut = this.userSignOut.bind(this);
+        // this.addMoney = this.addMoney.bind(this);
+        // this.refreshState = this.refreshState.bind(this);
     }
+
+    // refreshState(){
+    //     axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
+    //     .then(response => {
+    //         this.setState({
+    //             firstname: response.data[0].firstname,
+    //             lastname: response.data[0].lastname,
+    //             branch: response.data[0].branch,
+    //             balance: response.data[0].balance
+    //         });
+    //     }).catch(function(err){
+    //         console.log(err + 'bulla');
+    //     });
+    // }
 
     componentDidMount(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
@@ -44,12 +60,25 @@ export default class customerDashboard extends  Component {
         })
     }
 
+    // addMoney(){
+    //     axios.post('http://localhost:4000/customer/addmoney', {addedmoney: 10000}, {withCredentials: true})
+    //     .then(response => {
+    //
+    //     })
+    //     .catch(function(err) {
+    //         console.log(err);
+    //     });
+    //     this.refreshState();
+    // }
+
     render(){
         return (
             <Router>
                 <div style={{marginTop: 10}}>
                    <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button>
+                       Wallet balance = {this.state.balance}
+                       // <Button variant="primary" onClick={this.addMoney}>Add Money</Button>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">

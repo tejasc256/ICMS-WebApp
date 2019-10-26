@@ -57,15 +57,16 @@ router.get('/', function(req, res) {
 });
 
 router.post('/', auth, function(req, res) {
-    sql.query("insert into requests(cid, pid, type) values (?,?,?)", [req.session.cid, req.body.pid, req.body.type], function(err , result) {
+
+    sql.query('call BuyPolicy(?,?,?, @result); select @result as isSuccess;', [req.session.cid, req.body.pid, req.body.type], function(err ,result) {
         if(err){
             console.log(err);
-            throw err;
         }
         else{
-            res.send(result);
+            res.send(result[1][0]);
         }
     });
+
 });
 
 module.exports = router;

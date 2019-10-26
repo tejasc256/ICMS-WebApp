@@ -7,7 +7,8 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'root',
-    database : 'icms'
+    database : 'icms',
+    multipleStatements: true
 });
 
 connection.connect(function(err) {
