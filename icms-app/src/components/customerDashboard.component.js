@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Popup from 'reactjs-popup';
 
 import CustomerPolicies from "./customerPolicies.component";
 import CustomerClaims from "./customerClaims.component";
+import AddMoney from "./addMoney.component";
 
 export default class customerDashboard extends  Component {
     constructor(props){
@@ -18,23 +20,7 @@ export default class customerDashboard extends  Component {
         }
 
         this.userSignOut = this.userSignOut.bind(this);
-        // this.addMoney = this.addMoney.bind(this);
-        // this.refreshState = this.refreshState.bind(this);
     }
-
-    // refreshState(){
-    //     axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
-    //     .then(response => {
-    //         this.setState({
-    //             firstname: response.data[0].firstname,
-    //             lastname: response.data[0].lastname,
-    //             branch: response.data[0].branch,
-    //             balance: response.data[0].balance
-    //         });
-    //     }).catch(function(err){
-    //         console.log(err + 'bulla');
-    //     });
-    // }
 
     componentDidMount(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
@@ -53,32 +39,21 @@ export default class customerDashboard extends  Component {
     userSignOut(){
         axios.get('http://localhost:4000/login/logout', {withCredentials: true})
         .then(response => {
-            this.props.history.push("/");
+            this.props.history.push("/login");
         })
         .catch(function(err) {
             console.log(err);
         })
     }
 
-    // addMoney(){
-    //     axios.post('http://localhost:4000/customer/addmoney', {addedmoney: 10000}, {withCredentials: true})
-    //     .then(response => {
-    //
-    //     })
-    //     .catch(function(err) {
-    //         console.log(err);
-    //     });
-    //     this.refreshState();
-    // }
-
     render(){
         return (
             <Router>
                 <div style={{marginTop: 10}}>
                    <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
-                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button>
-                       Wallet balance = {this.state.balance}
-                       // <Button variant="primary" onClick={this.addMoney}>Add Money</Button>
+                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
+                       Wallet balance = {this.state.balance} <br/>
+                   <AddMoney/>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
