@@ -15,4 +15,16 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/policychart', function(req, res) {
+    sql.query("select count(*) from policy group by type", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
 module.exports = router;

@@ -11,6 +11,7 @@ import CustomerDashboard from "./components/customerDashboard.component";
 import ViewClaims from "./components/viewClaims.component";
 import ViewManagers from "./components/viewManagers.component";
 import ViewAgents from "./components/viewAgents.component";
+import PolicyChart from "./components/policyChart.component";
 
 class App extends Component {
     render(){
@@ -47,6 +48,7 @@ class App extends Component {
                 <Route path = "/claims" component = {ViewClaims}/>
                 <Route path = "/ceo" component = {ViewManagers}/>
                 <Route path = "/manager" component = {ViewAgents}/>
+                <Route path = "/ceo/policychart" component = {PolicyChart}/>
                     </div>
 
             </Router>
