@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
-export default class agentLogin extends  Component {
+export default class investigatorLogin extends  Component {
     constructor(props){
         super(props);
 
@@ -31,10 +31,10 @@ export default class agentLogin extends  Component {
     onSubmit(e){
         e.preventDefault();
 
-        axios.post('http://localhost:4000/login/agent', {email: this.state.email, password: this.state.password}, {withCredentials: true}).then(response => {
+        axios.post('http://localhost:4000/login/investigator', {email: this.state.email, password: this.state.password}, {withCredentials: true}).then(response => {
             console.log('login response', response.data);
             if(response.data === "AuthPass"){
-                this.props.history.push("/agent/dashboard");
+                this.props.history.push("/investigator/dashboard");
             }
             else{
                 this.setState({
@@ -48,7 +48,7 @@ export default class agentLogin extends  Component {
     render(){
         return (
             <div style={{marginTop: 10}}>
-               <h3>Agent Login</h3>
+               <h3>Investigator Login</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
                        <label>Email: </label>

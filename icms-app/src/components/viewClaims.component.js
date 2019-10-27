@@ -3,15 +3,50 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Claim = props => (
-    <tr>
-        <td>{props.claim.claim_id}</td>
-        <td>{props.claim.cid}</td>
-        <td>{props.claim.pid}</td>
-        <td>{props.claim.aid}</td>
-        <td>{props.claim.amount}</td>
-    </tr>
-)
+import { Button } from 'react-bootstrap';
+
+class Claim extends Component {
+    constructor(props){
+        super(props);
+
+        this.grantClaim = this.grantClaim.bind(this);
+        this.rejectClaim = this.rejectClaim.bind(this);
+    }
+
+    grantClaim(){
+        axios.post('http://localhost:4000/investigate', {claim_id: this.props.claim.claim_id, granted: 1}, {withCredentials: true})
+        .then(response => {
+            console.log((response));
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    rejectClaim(){
+        axios.post('http://localhost:4000/investigate', {claim_id: this.props.claim.claim_id, granted: 0}, {withCredentials: true})
+        .then(response => {
+            console.log((response));
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    render(){
+        return(
+            <tr>
+                <td>{this.props.claim.claim_id}</td>
+                <td>{this.props.claim.cid}</td>
+                <td>{this.props.claim.pname}</td>
+                <td>{this.props.claim.aname}</td>
+                <td>{this.props.claim.amount}</td>
+                <td><Button variant="success" onClick={this.grantClaim}>Reimburse</Button></td>
+                <td><Button variant="danger" onClick={this.rejectClaim}>Reject</Button></td>
+            </tr>
+        );
+    }
+}
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
@@ -19,7 +54,7 @@ export default class OtherPage extends  Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/claims/')
+        axios.get('http://localhost:4000/claim/')
             .then(response => {
                 console.log(response.data);
                 this.setState({ claims: response.data });
@@ -44,9 +79,11 @@ export default class OtherPage extends  Component {
                         <tr>
                             <th>Claim ID</th>
                             <th>CID</th>
-                            <th>PID</th>
-                            <th>Attribute ID</th>
+                            <th>Policy Name</th>
+                            <th>Attribute Name</th>
                             <th>Amount</th>
+                            <th>Reimburse</th>
+                            <th>Reject</th>
                         </tr>
                     </thead>
                     <tbody>

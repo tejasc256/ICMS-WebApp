@@ -15,6 +15,8 @@ import CustomerSignUp from "./components/customerSignUp.component";
 import EditProfile from "./components/editProfile.component";
 import AgentDashboard from "./components/agentDashboard.component";
 import AgentLogin from "./components/agentsLogin.component";
+import InvestigatorDashboard from "./components/investigatorDashboard.component";
+import InvestigatorLogin from "./components/investigatorLogin.component";
 
 class App extends Component {
     render(){
@@ -58,6 +60,8 @@ class App extends Component {
                     <Route path = "/editprofile" component = {EditProfile}/>
                     <Route path = "/agent/dashboard" component = {AgentDashboard}/>
                     <Route path = "/agent/login" component = {AgentLogin}/>
+                    <Route path = "/investigator/login" component = {InvestigatorLogin}/>
+                    <Route path = "/investigator/dashboard" component = {InvestigatorDashboard}/>
                 </div>
 
             </Router>

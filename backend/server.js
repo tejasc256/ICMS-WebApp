@@ -39,7 +39,6 @@ app.use('/attribute', attributesRouter);
 app.use('/login', loginRouter);
 app.use('/claim', claimRouter);
 app.use('/manager',managerRouter);
-app.use('/claims',claimRouter); 
 app.use('/ceo',ceoRouter);
 app.use('/investigate',investigateRouter);
 
