@@ -3,7 +3,7 @@ var router = express.Router();
 var sql = require('../model/db');
 
 var auth = function(req, res, next) {
-    if(req.session && req.session.cid){
+    if(req.session){
         return next();
     }
     else{
@@ -20,8 +20,44 @@ router.post('/customer', function(req, res) {
         else{
             if(result.length == 1){
                 console.log(result[0].cid);
+                if(req.sesson){
+                    req.session.destroy(err => {
+                        if(err){
+                            return console.log(err);
+                        }
+                        res.send("logged out");
+                    });
+                }
                 req.session.cid = result[0].cid;
                 req.session.customer = true;
+                res.send("AuthPass");
+            }
+            else{
+                res.send("AuthFail");
+            }
+        }
+    });
+});
+
+router.post('/agent', function(req, res) {
+    sql.query("select agent_id from agent_login where email = ? and password = ?", [req.body.email, req.body.password], function(err, result) {
+        if(err){
+            throw err;
+            console.log(err);
+        }
+        else{
+            if(result.length == 1){
+                console.log(result[0].agent_id);
+                if(req.sesson){
+                    req.session.destroy(err => {
+                        if(err){
+                            return console.log(err);
+                        }
+                        res.send("logged out");
+                    });
+                }
+                req.session.agent_id = result[0].agent_id;
+                req.session.agent = true;
                 res.send("AuthPass");
             }
             else{
@@ -39,9 +75,12 @@ router.get('/testpage', auth, function(req, res) {
                 console.log(err);
             }
             else{
-                res.send('Welcome ' + result[0].firstname + ' !');
+                res.send('Customer ' + result[0].firstname + ' !');
             }
         });
+    }
+    else if(req.session.agent){
+        res.send('Agent ' + req.session.agent_id);
     }
     else{
         res.send("AuthFail");

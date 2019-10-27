@@ -2,6 +2,8 @@
 
 var Agent = require('../model/agentModel');
 
+var sql = require('../model/db');
+
 exports.list_all_agents = function(req, res) {
     Agent.getAllAgent(function(err, agent) {
 
@@ -37,10 +39,14 @@ exports.create_a_agent = function(req, res) {
 
 
 exports.read_a_agent = function(req, res) {
-    Agent.getAgentById(req.params.agent_id, function(err, agent) {
-        if (err)
-        res.send(err);
-        res.json(agent);
+    sql.query("select * from agent where agent_id = ?", req.session.agent_id, function(err, result) {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        else{
+            res.send(result);
+        }
     });
 };
 

@@ -30,17 +30,7 @@ router.get('/', function(req, res) {
         });
     }
     else if(req.session && req.session.agent_id){
-        var agentbranch;
-        sql.query("select branch from agent where agent_id = ?", req.session.agent_id, function(err, result) {
-            if(err){
-                console.log(err);
-                throw err;
-            }
-            else{
-                agentbranch = result[0].branch;
-            }
-        });
-        sql.query("select * from requests inner join customer using cid where branch=? and rid not in (select rid from agent_requests)", agentbranch, function(err , result) {
+        sql.query("select * from requests inner join customer on requests.cid = customer.cid inner join customer_login on customer.cid = customer_login.cid inner join policy on policy.pid = requests.pid where customer.branch = (select branch from agent where agent_id = ?) and rid not in (select rid from agent_requests);", req.session.agent_id, function(err ,result) {
             if(err){
                 console.log(err);
                 throw err;
@@ -51,8 +41,7 @@ router.get('/', function(req, res) {
         });
     }
     else{
-        res.status(401);
-        res.send("Please login");
+        res.send("AuthFail");
     }
 });
 

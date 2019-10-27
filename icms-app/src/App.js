@@ -13,6 +13,8 @@ import ViewManagers from "./components/viewManagers.component";
 import ViewAgents from "./components/viewAgents.component";
 import CustomerSignUp from "./components/customerSignUp.component";
 import EditProfile from "./components/editProfile.component";
+import AgentDashboard from "./components/agentDashboard.component";
+import AgentLogin from "./components/agentsLogin.component";
 
 class App extends Component {
     render(){
@@ -54,6 +56,8 @@ class App extends Component {
                     <Route path = "/manager" component = {ViewAgents}/>
                     <Route path = "/signup" component = {CustomerSignUp}/>
                     <Route path = "/editprofile" component = {EditProfile}/>
+                    <Route path = "/agent/dashboard" component = {AgentDashboard}/>
+                    <Route path = "/agent/login" component = {AgentLogin}/>
                 </div>
 
             </Router>
