@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import { Modal, Button } from 'react-bootstrap';
+
 const Attribute = props => (
     <tr>
         <td>{props.attribute.aid}</td>
@@ -14,11 +16,9 @@ export default class ViewPolicy extends Component {
     constructor(props) {
         super(props);
 
-        // this.onChangeTodoDescription = this.onChangeTodoDescription.bind(this);
-        // this.onChangeTodoResponsible = this.onChangeTodoResponsible.bind(this);
-        // this.onChangeTodoPriority = this.onChangeTodoPriority.bind(this);
-        // this.onChangeTodoCompleted = this.onChangeTodoCompleted.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.handleOpen = this.handleOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
 
         this.state = {
             pid: '',
@@ -26,13 +26,14 @@ export default class ViewPolicy extends Component {
             premium: '',
             duration: '',
             type: '',
-            attributes: []
+            attributes: [],
+            modalShow: false
         }
 
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/policy/'+this.props.match.params.pid, {withCredentials: true})
+        axios.get('http://localhost:4000/policy/'+this.props.pid, {withCredentials: true})
             .then(response => {
                 this.setState({
                     pid: response.data[0].pid,
@@ -45,7 +46,7 @@ export default class ViewPolicy extends Component {
             .catch(function (error) {
                 console.log(error);
             });
-        axios.get('http://localhost:4000/attribute/'+this.props.match.params.pid)
+        axios.get('http://localhost:4000/attribute/'+this.props.pid, {withCredentials: true})
             .then(response => {
                 this.setState({attributes: response.data});
             })
@@ -81,60 +82,77 @@ export default class ViewPolicy extends Component {
             })
     }
 
+    handleClose(){
+        this.setState({
+            showModal: false
+        })
+    }
+
+    handleOpen(){
+        this.setState({
+            showModal: true
+        });
+    }
+
     render() {
         return (
             <div>
-                <h3 align="center">Buy Policy</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>PID: </label>
-                        <input  type="text"
-                                className="form-control"
-                                value={this.state.pid}
-                                />
+                <Button onClick={this.handleOpen} variant="primary">Buy Policy</Button>
+                <Modal show={this.state.showModal} onHide={this.handleClose}>
+                    <div>
+                        <h3 align="center">Buy Policy</h3>
+                        <form onSubmit={this.onSubmit}>
+                            <div className="form-group">
+                                <label>PID: </label>
+                                <input  type="text"
+                                        className="form-control"
+                                        value={this.state.pid}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <label>Name: </label>
+                                <input
+                                        type="text"
+                                        className="form-control"
+                                        value={this.state.name}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <label>Premium: </label>
+                                <input
+                                        type="text"
+                                        className="form-control"
+                                        value={this.state.premium}
+                                        />
+                            </div>
+                            <div className="form-group">
+                                <label>Duration: </label>
+                                <input
+                                        type="text"
+                                        className="form-control"
+                                        value={this.state.duration}
+                                        />
+                            </div>
+                            <br />
+                            <h3>Attributes List</h3>
+                            <table className="table table-striped" style={{ marginTop: 20 }} >
+                                <thead>
+                                    <tr>
+                                        <th>AID</th>
+                                        <th>Attribute Name</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    { this.attributesList() }
+                                </tbody>
+                            </table>
+                            <div className="form-group">
+                                <input type="submit" value="Buy Policy" className="btn btn-primary" />
+                            </div>
+                        </form>
                     </div>
-                    <div className="form-group">
-                        <label>Name: </label>
-                        <input
-                                type="text"
-                                className="form-control"
-                                value={this.state.name}
-                                />
-                    </div>
-                    <div className="form-group">
-                        <label>Premium: </label>
-                        <input
-                                type="text"
-                                className="form-control"
-                                value={this.state.premium}
-                                />
-                    </div>
-                    <div className="form-group">
-                        <label>Duration: </label>
-                        <input
-                                type="text"
-                                className="form-control"
-                                value={this.state.duration}
-                                />
-                    </div>
-                    <br />
-                    <h3>Attributes List</h3>
-                    <table className="table table-striped" style={{ marginTop: 20 }} >
-                        <thead>
-                            <tr>
-                                <th>AID</th>
-                                <th>Attribute Name</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { this.attributesList() }
-                        </tbody>
-                    </table>
-                    <div className="form-group">
-                        <input type="submit" value="Buy Policy" className="btn btn-primary" />
-                    </div>
-                </form>
+                </Modal>
             </div>
         );
     }

@@ -2,18 +2,40 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Claim = props => (
-    <tr>
-        <td>{props.claim.claim_id}</td>
-        <td>{props.claim.pname}</td>
-        <td>{props.claim.amount}</td>
-        <td>{props.claim.aname}</td>
-    </tr>
-)
+class Claim extends Component {
+    constructor(props){
+        super(props);
+
+        if(props.claim.status == 0){
+            this.state = {status: 'Rejected'};
+        }
+        else if(props.claim.status == 1){
+            this.state = {status: 'Reimbursed'};
+        }
+        else{
+            this.state = {status: 'Pending'};
+        }
+    }
+
+    render(){
+        return(
+            <tr>
+                <td>{this.props.claim.claim_id}</td>
+                <td>{this.props.claim.pname}</td>
+                <td>{this.props.claim.amount}</td>
+                <td>{this.props.claim.aname}</td>
+                <td>{this.state.status}</td>
+            </tr>
+        );
+    }
+}
+
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {claims: []};
+
+        this.claimsList = this.claimsList.bind(this);
     }
 
     componentDidMount() {
@@ -43,6 +65,7 @@ export default class OtherPage extends  Component {
                             <th>Policy Name</th>
                             <th>Amount</th>
                             <th>Attribute Name</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>

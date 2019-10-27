@@ -2,18 +2,30 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
+import ViewPolicy from "./viewPolicy.component";
 
-const Policy = props => (
-    <tr>
-        <td>{props.policy.pid}</td>
-        <td>{props.policy.name}</td>
-        <td>{props.policy.premium}</td>
-        <td>{props.policy.duration}</td>
-        <td>
-            <Link to={"/viewpol/"+props.policy.pid}>Buy</Link>
-        </td>
-    </tr>
-)
+class Policy extends Component {
+    constructor(props){
+        super(props);
+
+    }
+
+    render(){
+        return(
+            <tr>
+                <td>{this.props.policy.pid}</td>
+                <td>{this.props.policy.name}</td>
+                <td>{this.props.policy.premium}</td>
+                <td>{this.props.policy.duration}</td>
+                <td>
+                    <ViewPolicy pid={this.props.policy.pid}/>
+                </td>
+            </tr>
+        );
+    }
+}
+
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
