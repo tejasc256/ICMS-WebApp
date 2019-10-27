@@ -14,7 +14,7 @@ class Claim extends Component {
     }
 
     grantClaim(){
-        axios.post('http://localhost:4000/investigate', {claim_id: this.props.claim.claim_id, granted: 1}, {withCredentials: true})
+        axios.post('http://localhost:4000/investigator', {claim_id: this.props.claim.claim_id, granted: 1}, {withCredentials: true})
         .then(response => {
             console.log((response));
         })
@@ -24,7 +24,7 @@ class Claim extends Component {
     }
 
     rejectClaim(){
-        axios.post('http://localhost:4000/investigate', {claim_id: this.props.claim.claim_id, granted: 0}, {withCredentials: true})
+        axios.post('http://localhost:4000/investigator', {claim_id: this.props.claim.claim_id, granted: 0}, {withCredentials: true})
         .then(response => {
             console.log((response));
         })

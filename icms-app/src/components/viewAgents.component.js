@@ -1,20 +1,40 @@
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const Agent = props => (
-    <tr>
-        <td>{props.agent.agent_id}</td>
-        <td>{props.agent.firstname}</td>
-        <td>{props.agent.lastname}</td>
-        <td>{props.agent.branch}</td>
-        <td>{props.agent.commission}</td>
-        <td>
-            <Link to={"/viewagent/"+props.agent.agent_id}>Change Branch</Link>
-        </td>
-    </tr>
-)
+class Agent extends Component {
+    constructor(props){
+        super(props);
+
+        this.changeBranch = this.changeBranch.bind(this);
+    }
+
+    changeBranch(){
+        axios.post('http://localhost:4000/manager/changebranch', {agent_id: this.props.agent_id, branch: this.props.branch}, {withCredentials: true})
+        .then(response => {
+            console.log(response);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    render(){
+        return(
+            <tr>
+                <td>{this.props.agent.agent_id}</td>
+                <td>{this.props.agent.firstname}</td>
+                <td>{this.props.agent.lastname}</td>
+                <td>{this.props.agent.branch}</td>
+                <td>{this.props.agent.commission}</td>
+                <td>
+                    <Button variant="success" onClick={this.changeBranch}>Change Branch</Button>
+                </td>
+            </tr>
+        );
+    }
+}
+
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
@@ -22,8 +42,9 @@ export default class OtherPage extends  Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/manager')
+        axios.get('http://localhost:4000/manager', {withCredentials: true})
             .then(response => {
+                console.log(response);
                 this.setState({ agents: response.data });
             })
             .catch(function (error){

@@ -17,6 +17,9 @@ import AgentDashboard from "./components/agentDashboard.component";
 import AgentLogin from "./components/agentsLogin.component";
 import InvestigatorDashboard from "./components/investigatorDashboard.component";
 import InvestigatorLogin from "./components/investigatorLogin.component";
+import ManagerLogin from "./components/managerLogin.component";
+import ManagerDashboard from "./components/managerDashboard.component";
+import ViewAgent from "./components/viewAgent.component";
 
 class App extends Component {
     render(){
@@ -44,6 +47,16 @@ class App extends Component {
                                 <li className="navbar-item">
                                     <Link to="/signup" className="nav-link">Sign Up</Link>
                                 </li>
+                                <li className="navbar-item">
+                                    <Link to="/agent/login" className="nav-link">Agent Login</Link>
+                                </li>
+                                <li className="navbar-item">
+                                    <Link to="/investigator/login" className="nav-link">Investigator Login</Link>
+                                </li>
+                                <li className="navbar-item">
+                                    <Link to="/manager/login" className="nav-link">Manager Login</Link>
+                                </li>
+
                             </ul>
                         </div>
                     </nav>
@@ -55,13 +68,15 @@ class App extends Component {
                     <Route path = "/dashboard" component = {CustomerDashboard}/>
                     <Route path = "/claims" component = {ViewClaims}/>
                     <Route path = "/ceo" component = {ViewManagers}/>
-                    <Route path = "/manager" component = {ViewAgents}/>
                     <Route path = "/signup" component = {CustomerSignUp}/>
                     <Route path = "/editprofile" component = {EditProfile}/>
                     <Route path = "/agent/dashboard" component = {AgentDashboard}/>
                     <Route path = "/agent/login" component = {AgentLogin}/>
                     <Route path = "/investigator/login" component = {InvestigatorLogin}/>
                     <Route path = "/investigator/dashboard" component = {InvestigatorDashboard}/>
+                    <Route path = "/manager/login" component = {ManagerLogin}/>
+                    <Route path = "/manager/dashboard" component = {ManagerDashboard}/>
+                    <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
                 </div>
 
             </Router>

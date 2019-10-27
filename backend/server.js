@@ -40,7 +40,7 @@ app.use('/login', loginRouter);
 app.use('/claim', claimRouter);
 app.use('/manager',managerRouter);
 app.use('/ceo',ceoRouter);
-app.use('/investigate',investigateRouter);
+app.use('/investigator',investigateRouter);
 
 // This line should be AFTER all routes
 app.get('*', function(req, res) {

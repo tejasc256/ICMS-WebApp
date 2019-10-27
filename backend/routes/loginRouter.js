@@ -95,6 +95,34 @@ router.post('/investigator', function(req, res) {
     });
 });
 
+router.post('/manager', function(req, res) {
+    sql.query("select mgr_id from manager_login where email = ? and password = ?", [req.body.email, req.body.password], function(err, result) {
+        if(err){
+            throw err;
+            console.log(err);
+        }
+        else{
+            if(result.length == 1){
+                console.log(result[0].mgr_id);
+                if(req.sesson){
+                    req.session.destroy(err => {
+                        if(err){
+                            return console.log(err);
+                        }
+                        res.send("logged out");
+                    });
+                }
+                req.session.mgr_id = result[0].mgr_id;
+                req.session.manager = true;
+                res.send("AuthPass");
+            }
+            else{
+                res.send("AuthFail");
+            }
+        }
+    });
+});
+
 router.get('/testpage', auth, function(req, res) {
     if(req.session.customer){
         sql.query("select firstname from customer where cid = ?", req.session.cid, function(err ,result) {
@@ -112,6 +140,9 @@ router.get('/testpage', auth, function(req, res) {
     }
     else if(req.session.investigator){
         res.send('Investigator ' + req.session.inv_id);
+    }
+    else if(req.session.manager){
+        res.send('Manager ' + req.session.mgr_id);
     }
     else{
         res.send("AuthFail");

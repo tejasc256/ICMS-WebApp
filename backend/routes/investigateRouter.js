@@ -4,7 +4,7 @@ var router = express.Router();
 var sql = require('../model/db');
 
 var auth = function(req, res, next) {
-    if(req.session.investigator){
+    if(req.session.investigator || req.session.manager){
         return next();
     }
     else{
@@ -23,6 +23,7 @@ router.get('/profile', auth, function(req, res) {
     });
 });
 
+
 router.post('/',auth, function(req, res) {
     sql.query("insert into investigates values (?,?,?)", [req.session.inv_id, req.body.claim_id, req.body.granted], function(err , result) {
         if(err){
@@ -34,5 +35,7 @@ router.post('/',auth, function(req, res) {
         }
     });
 });
+
+
 
 module.exports = router;

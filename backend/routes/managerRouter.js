@@ -4,25 +4,47 @@ var router = express.Router();
 var sql = require('../model/db');
 
 var auth = function(req, res, next) {
-    if(req.session && req.session.mgr_id){
+    if(req.session.manager){
         return next();
     }
     else{
-        res.sendStatus(401);
+        res.send("AuthFail");
     }
 };
 
-router.get('/', auth , function(req, res) {
-    sql.query("select * from agents where mgr_id = ?", req.session.mgr_id, function(err , result) {
+router.get('/profile', auth, function(req, res) {
+    sql.query("select * from manager where mgr_id = ?", req.session.mgr_id, function(err, result) {
         if(err){
             console.log(err);
-            throw err;
         }
         else{
             res.send(result);
         }
     });
 });
+
+router.post('/changebranch', auth, function(req, res) {
+    sql.query("update agent set branch = ? where agent_id = ?", [req.body.branch, req.body.agent_id], function(err, result) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    })
+});
+
+router.get('/', auth , function(req, res) {
+    sql.query("select * from agent where mgr_id = ?", req.session.mgr_id, function(err , result) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
 
 
 
