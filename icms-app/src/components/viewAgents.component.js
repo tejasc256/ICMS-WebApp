@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import { Button } from 'react-bootstrap';
+
 class Agent extends Component {
     constructor(props){
         super(props);
