@@ -57,6 +57,21 @@ class ChartsPage extends React.Component {
     }
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:4000/ceo/policychart')
+        .then(response => {
+            this.setState({ data1 : response.data.map(function(current_count,i){
+              return (Object.values(current_count)[0])
+            })});
+            this.state.dataBar.datasets[0].data = this.state.data1;
+            console.log(this.state.data1);
+          }
+        )
+        .catch(function (error){
+            console.log(error);
+        }   )
+}
+
 
   render() {
     return (

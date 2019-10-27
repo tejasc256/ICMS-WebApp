@@ -14,6 +14,7 @@ const Policy = props => (
         </td>
     </tr>
 )
+
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);

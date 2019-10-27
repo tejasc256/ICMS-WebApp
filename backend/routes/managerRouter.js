@@ -12,6 +12,19 @@ var auth = function(req, res, next) {
     }
 };
 
+router.get('/profile', auth, function(req ,res){
+    sql.query("select * from manager where mgr_id = ?", req.session.mgr_id, function(err, result) {
+        if(err){
+            console.log(err);
+            res.send(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
 router.get('/', auth , function(req, res) {
     sql.query("select * from agents where mgr_id = ?", req.session.mgr_id, function(err , result) {
         if(err){
