@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import MakeClaim from "./makeClaim.component";
+
 const Policy = props => (
     <tr>
         <td>{props.policy.pid}</td>
@@ -10,7 +12,7 @@ const Policy = props => (
         <td>{props.policy.premium}</td>
         <td>{props.policy.duration}</td>
         <td>
-            <Link to={"/viewpol/"+props.policy.pid}>Make Claim</Link>
+            <MakeClaim pid={props.policy.pid}/>
         </td>
     </tr>
 )

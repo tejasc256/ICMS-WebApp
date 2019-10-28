@@ -27,7 +27,7 @@ export default class ViewPolicy extends Component {
             duration: '',
             type: '',
             attributes: [],
-            modalShow: false
+            showModal: false
         }
 
     }
@@ -62,7 +62,7 @@ export default class ViewPolicy extends Component {
         .then(response => {
             console.log(response);
             if(response.data === "AuthFail"){
-                this.props.history.push('/login');
+                alert('Please Login');
             }
             else{
                 if(response.data.isSuccess === 0){

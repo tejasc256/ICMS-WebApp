@@ -6,6 +6,7 @@ import Popup from 'reactjs-popup';
 
 import CustomerPolicies from "./customerPolicies.component";
 import CustomerClaims from "./customerClaims.component";
+import CustomerRequests from "./customerRequests.component";
 import AddMoney from "./addMoney.component";
 
 export default class customerDashboard extends  Component {
@@ -20,9 +21,11 @@ export default class customerDashboard extends  Component {
         }
 
         this.userSignOut = this.userSignOut.bind(this);
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    componentDidMount(){
+
+    fetchData(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
         .then(response => {
             this.setState({
@@ -34,6 +37,11 @@ export default class customerDashboard extends  Component {
         }).catch(function(err){
             console.log(err + 'bulla');
         });
+    }
+
+    componentDidMount(){
+        this.fetchData();
+        this.timer = setInterval(() => this.fetchData(), 250);
     }
 
     userSignOut(){
@@ -53,7 +61,7 @@ export default class customerDashboard extends  Component {
                    <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
                        Wallet balance = {this.state.balance} <br/>
-                   <AddMoney/>
+                   <AddMoney balance={this.state.balance}/>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -64,11 +72,16 @@ export default class customerDashboard extends  Component {
                            <li className="navbar-item">
                            <Link to="/myclaims" className="nav-link">My Claims</Link>
                            </li>
+                           <li className="navbar-item">
+                           <Link to="/myrequests" className="nav-link">My Requests</Link>
+                           </li>
+
                        </ul>
                    </nav>
                </div>
                <Route path = "/mypolicies" component = {CustomerPolicies} />
                <Route path = "/myclaims" component = {CustomerClaims} />
+               <Route path = "/myrequests" component = {CustomerRequests} />
             </Router>
 
         );
