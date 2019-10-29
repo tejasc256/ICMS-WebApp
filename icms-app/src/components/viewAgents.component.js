@@ -9,6 +9,7 @@ class Agent extends Component {
         super(props);
 
         this.changeBranch = this.changeBranch.bind(this);
+        this.deleteAgent = this.deleteAgent.bind(this);
     }
 
     changeBranch(){
@@ -17,6 +18,17 @@ class Agent extends Component {
             console.log(response);
         })
         .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    deleteAgent(){
+        axios.delete('http://localhost:4000/agent/'+this.props.agent.agent_id)
+        .then(response => {
+            console.log(response);
+            //Display Toast
+        })
+        .catch(err => {
             console.log(err);
         });
     }
@@ -32,6 +44,9 @@ class Agent extends Component {
                 <td>
                     <Button variant="success" onClick={this.changeBranch}>Change Branch</Button>
                 </td>
+                <td>
+                    <Button variant="danger" onClick={this.deleteAgent}>Delete Agent</Button>
+                </td>
             </tr>
         );
     }
@@ -41,9 +56,13 @@ export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {agents: []};
+
+        this.fetchData = this.fetchData.bind(this);
+        this.agentList = this.agentList.bind(this);
     }
 
-    componentDidMount() {
+
+    fetchData(){
         axios.get('http://localhost:4000/manager', {withCredentials: true})
             .then(response => {
                 console.log(response);
@@ -51,7 +70,12 @@ export default class OtherPage extends  Component {
             })
             .catch(function (error){
                 console.log(error);
-            }   )
+            });
+    }
+
+    componentDidMount() {
+        this.fetchData();
+        this.timer = setInterval(() => this.fetchData(), 250);
     }
 
     agentList() {
@@ -73,6 +97,7 @@ export default class OtherPage extends  Component {
                             <th>Branch</th>
                             <th>Commission</th>
                             <th>Change Branch</th>
+                            <th>Delete Agent</th>
                         </tr>
                     </thead>
                     <tbody>

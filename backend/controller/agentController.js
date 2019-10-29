@@ -16,28 +16,6 @@ exports.list_all_agents = function(req, res) {
 };
 
 
-exports.create_a_agent = function(req, res) {
-    var new_agent = new Agent(req.body);
-
-    console.log(new_agent);
-    //handles null error
-    if(!new_agent.firstname || !new_agent.lastname ||!new_agent.branch || !new_agent.mgr_id|| !new_agent.commission ){
-
-        res.status(400).send({ error:true, message: 'Please provide all information' });
-
-    }
-    else{
-
-        Agent.createAgent(new_agent, function(err, agent) {
-
-            if (err)
-            res.send(err);
-            res.json(agent);
-        });
-    }
-};
-
-
 exports.read_a_agent = function(req, res) {
     sql.query("select * from agent where agent_id = ?", req.session.agent_id, function(err, result) {
         if(err){

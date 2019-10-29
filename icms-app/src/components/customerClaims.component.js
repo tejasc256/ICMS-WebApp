@@ -18,15 +18,39 @@ class Claim extends Component {
     }
 
     render(){
-        return(
-            <tr>
-                <td>{this.props.claim.claim_id}</td>
-                <td>{this.props.claim.pname}</td>
-                <td>{this.props.claim.amount}</td>
-                <td>{this.props.claim.aname}</td>
-                <td>{this.state.status}</td>
-            </tr>
-        );
+        if(this.props.claim.status == 0){
+            return(
+                <tr className="table-danger">
+                    <td>{this.props.claim.claim_id}</td>
+                    <td>{this.props.claim.pname}</td>
+                    <td>{this.props.claim.amount}</td>
+                    <td>{this.props.claim.aname}</td>
+                    <td>{this.state.status}</td>
+                </tr>
+            );
+        }
+        else if(this.props.claim.status == 1){
+            return(
+                <tr className="table-success">
+                    <td>{this.props.claim.claim_id}</td>
+                    <td>{this.props.claim.pname}</td>
+                    <td>{this.props.claim.amount}</td>
+                    <td>{this.props.claim.aname}</td>
+                    <td>{this.state.status}</td>
+                </tr>
+            );
+        }
+        else{
+            return(
+                <tr className="table-warning">
+                    <td>{this.props.claim.claim_id}</td>
+                    <td>{this.props.claim.pname}</td>
+                    <td>{this.props.claim.amount}</td>
+                    <td>{this.props.claim.aname}</td>
+                    <td>{this.state.status}</td>
+                </tr>
+            );
+        }
     }
 }
 
@@ -55,8 +79,11 @@ export default class OtherPage extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div>
+            <div style={MyStyle}>
                 <h3>Claims List</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>

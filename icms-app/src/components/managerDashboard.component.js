@@ -53,6 +53,7 @@ export default class managerDashboard extends  Component {
                    <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
                    {this.state.branch} <br/>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
+                       <Button variant="primary" href="/create/agent">Create Agent</Button>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">

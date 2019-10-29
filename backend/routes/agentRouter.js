@@ -27,9 +27,10 @@ router.get('/fulfill/:rid',auth, function(req, res) {
     });
 });
 
-router.get('/', agentController.list_all_agents);
-router.post('/', agentController.create_a_agent);
 router.delete('/:agent_id', agentController.delete_a_agent);
+
+router.get('/', agentController.list_all_agents);
+
 
 
 

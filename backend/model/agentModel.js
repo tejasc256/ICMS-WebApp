@@ -10,20 +10,6 @@ var Agent = function(agent){
     this.mgr_id = agent.mgr_id;
 };
 
-Agent.createAgent = function (newAgent, result){
-    sql.query("INSERT INTO agent(firstname, lastname, commission, branch, mgr_id) values (?,?,?,?,?)", [newAgent.firstname, newAgent.lastname, newAgent.commission,
-        newAgent.branch, newAgent.mgr_id], function (err, res) {
-            if(err){
-                console.log("error: ", err);
-                result(err,null);
-            }
-            else{
-                console.log(res.insertId);
-                result(null, res.insertId);
-            }
-        });
-};
-
 Agent.getAgentById = function (agentId, result) {
         sql.query("Select * from agent where agent_id = ? ", agentId, function (err, res) {
                 if(err) {

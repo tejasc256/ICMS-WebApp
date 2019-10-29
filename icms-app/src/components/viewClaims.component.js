@@ -51,9 +51,11 @@ export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {claims: []};
+
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    componentDidMount() {
+    fetchData(){
         axios.get('http://localhost:4000/claim/')
             .then(response => {
                 console.log(response.data);
@@ -62,6 +64,11 @@ export default class OtherPage extends  Component {
             .catch(function (error){
                 console.log(error);
             }   )
+    }
+
+    componentDidMount() {
+        this.fetchData();
+        this.time = setInterval(() => this.fetchData(), 250);
     }
 
     claimList() {

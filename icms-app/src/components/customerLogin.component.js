@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+import { Toast } from 'react-bootstrap';
+
 export default class customerLogin extends  Component {
     constructor(props){
         super(props);
@@ -10,6 +12,7 @@ export default class customerLogin extends  Component {
         this.state = {
             cust_email: '',
             cust_password: '',
+            showToast: false
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -39,7 +42,7 @@ export default class customerLogin extends  Component {
             }
             else{
                 this.setState({
-                    cust_email: response.data
+                    showToast: true
                 });
             }
         }).catch(function(err) {
@@ -48,7 +51,7 @@ export default class customerLogin extends  Component {
     }
     render(){
         return (
-            <div style={{marginTop: 10}}>
+            <div style={{marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"}}>
                <h3>Customer Login</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
@@ -72,6 +75,13 @@ export default class customerLogin extends  Component {
                        <input type="submit" value="Login" className="btn btn-primary" />
                    </div>
                </form>
+               <Toast show={this.state.showToast}>
+                   <Toast.Header>
+                       <strong className="mr-auto">Login Error</strong>
+                       <small>right now</small>
+                   </Toast.Header>
+                   <Toast.Body>Please check your login credentials</Toast.Body>
+               </Toast>
            </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Container, Row, Col, Jumbotron } from 'react-bootstrap';
 import Popup from 'reactjs-popup';
 
 import CustomerPolicies from "./customerPolicies.component";
@@ -22,17 +22,22 @@ export default class customerDashboard extends  Component {
 
         this.userSignOut = this.userSignOut.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.numberWithCommas = this.numberWithCommas.bind(this);
     }
 
+    numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
     fetchData(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
         .then(response => {
+            var bal = this.numberWithCommas(response.data[0].balance);
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,
                 branch: response.data[0].branch,
-                balance: response.data[0].balance
+                balance: bal
             });
         }).catch(function(err){
             console.log(err + 'bulla');
@@ -57,26 +62,44 @@ export default class customerDashboard extends  Component {
     render(){
         return (
             <Router>
-                <div style={{marginTop: 10}}>
-                   <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
-                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
-                       Wallet balance = {this.state.balance} <br/>
-                   <AddMoney balance={this.state.balance}/>
+                <div>
+                    <Jumbotron style={{backgroundColor: "#f5efed", alignItems: "center", margin:"0%"}} fluid>
+                            <Container>
+                                <Row>
+                                    <Col md={10}>
+                                        <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
+                                            <br/>
+                                            <br/>
+                                            <h5>
+                                                Branch:  {this.state.branch} <br/><br/>
+                                                Wallet balance: {this.state.balance} <br/><br/>
+                                                <AddMoney balance={this.state.balance}/>
+                                            </h5>
+                                    </Col>
+                                    <Col md={2}>
+                                        <Button variant="info" onClick={this.userSignOut}>Sign Out</Button><br/>
+                                    </Col>
+                                </Row>
+                            </Container>
+                    </Jumbotron>
                </div>
-               <div className="container">
-                   <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                       <ul className="navbar-nav mr-auto">
-                           <li className="navbar-item">
-                           <Link to="/mypolicies" className="nav-link">My Policies</Link>
-                           </li>
-                           <li className="navbar-item">
-                           <Link to="/myclaims" className="nav-link">My Claims</Link>
-                           </li>
-                           <li className="navbar-item">
-                           <Link to="/myrequests" className="nav-link">My Requests</Link>
-                           </li>
-
-                       </ul>
+               <div>
+                   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                       <div class="mx-auto order-0">
+                           <div className="collapse navbar-collapse">
+                               <ul className="navbar-nav mr-auto">
+                                   <li className="navbar-item">
+                                   <Link to="/mypolicies" className="nav-link">My Policies</Link>
+                                   </li>
+                                   <li className="navbar-item">
+                                   <Link to="/myclaims" className="nav-link">My Claims</Link>
+                                   </li>
+                                   <li className="navbar-item">
+                                   <Link to="/myrequests" className="nav-link">My Requests</Link>
+                                   </li>
+                               </ul>
+                           </div>
+                       </div>
                    </nav>
                </div>
                <Route path = "/mypolicies" component = {CustomerPolicies} />

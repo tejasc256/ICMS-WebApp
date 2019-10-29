@@ -34,6 +34,18 @@ router.post('/changebranch', auth, function(req, res) {
     })
 });
 
+router.post('/create/agent', auth, function(req, res) {
+    sql.query("call CreateAgent(?,?,?,?,?,?,?)", [req.body.email, req.body.password, req.body.firstname, req.body.lastname, req.body.commission, req.body.branch, req.session.mgr_id],
+        function(err, result) {
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.send(result);
+            }
+    });
+})
+
 router.get('/', auth , function(req, res) {
     sql.query("select * from agent where mgr_id = ?", req.session.mgr_id, function(err , result) {
         if(err){

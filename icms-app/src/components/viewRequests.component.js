@@ -46,16 +46,23 @@ export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {requests: []};
+
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    componentDidMount() {
+    fetchData(){
         axios.get('http://localhost:4000/request/', {withCredentials: true})
             .then(response => {
                 this.setState({ requests: response.data });
             })
             .catch(function (error){
                 console.log(error);
-            }   )
+            }   );
+    }
+
+    componentDidMount() {
+        this.fetchData();
+        this.timer = setInterval(() => this.fetchData(), 250);
     }
 
     policyList() {

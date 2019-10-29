@@ -1,6 +1,8 @@
 import React, {Component} from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "./bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { Container, Row, Col} from 'react-bootstrap';
 
 import HomePage from "./components/home-page.component";
 import OtherPage from "./components/other-page.component";
@@ -20,46 +22,45 @@ import InvestigatorLogin from "./components/investigatorLogin.component";
 import ManagerLogin from "./components/managerLogin.component";
 import ManagerDashboard from "./components/managerDashboard.component";
 import ViewAgent from "./components/viewAgent.component";
+import CreateAgent from './components/createAgent.component';
 
 class App extends Component {
     render(){
+
         return (
             <Router>
-                <div className="container">
-                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="https://codingthesmartway.com" target="_blank">
-                        </a>
-                        <Link to="/" className="navbar-brand">CCICC</Link>
-                        <div className="collpase navbar-collapse">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="navbar-item">
-                                    <Link to="/" className="nav-link">Home Page</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/login" className="nav-link">Customer Login</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/other" className="nav-link">List Customers</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/policies" className="nav-link">View Policies</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/signup" className="nav-link">Sign Up</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/agent/login" className="nav-link">Agent Login</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/investigator/login" className="nav-link">Investigator Login</Link>
-                                </li>
-                                <li className="navbar-item">
-                                    <Link to="/manager/login" className="nav-link">Manager Login</Link>
-                                </li>
-
-                            </ul>
+                <div>
+                    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+                        <div class="mx-auto order-0">
+                            <div className="collapse navbar-collapse">
+                                <Link to="/" className="navbar-brand">CCICC</Link>
+                                <ul className="navbar-nav mr-auto">
+                                    <li className="navbar-item">
+                                        <Link to="/login" className="nav-link">Customer Login</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/other" className="nav-link">List Customers</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/policies" className="nav-link">View Policies</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/signup" className="nav-link">Sign Up</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/agent/login" className="nav-link">Agent Login</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/investigator/login" className="nav-link">Investigator Login</Link>
+                                    </li>
+                                    <li className="navbar-item">
+                                        <Link to="/manager/login" className="nav-link">Manager Login</Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </nav>
+                </div>
                     <Route path = "/" exact component = {HomePage}/>
                     <Route path = "/other" component = {OtherPage}/>
                     <Route path = "/login" component = {CustomerLogin}/>
@@ -77,11 +78,10 @@ class App extends Component {
                     <Route path = "/manager/login" component = {ManagerLogin}/>
                     <Route path = "/manager/dashboard" component = {ManagerDashboard}/>
                     <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
-                </div>
-
-            </Router>
-        );
+                    <Route path = "/create/agent" component = {CreateAgent} />
+                </Router>
+            );
+        }
     }
-}
 
-export default App;
+    export default App;
