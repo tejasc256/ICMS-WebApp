@@ -18,12 +18,14 @@ export default class customerDashboard extends  Component {
             firstname: '',
             lastname: '',
             branch: '',
-            balance: ''
+            balance: '',
+            branches: []
         }
 
         this.userSignOut = this.userSignOut.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.numberWithCommas = this.numberWithCommas.bind(this);
+        this.getBranch = this.getBranch.bind(this);
     }
 
     numberWithCommas(x) {
@@ -43,6 +45,24 @@ export default class customerDashboard extends  Component {
         }).catch(function(err){
             console.log(err + 'bulla');
         });
+
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            this.setState({
+                branches: response.data
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    getBranch(){
+        for(var i=0; i<this.state.branches.length; i++){
+            if(this.state.branches[i].branch_id === this.state.branch){
+                return (this.state.branches[i].city + ', ' + this.state.branches[i].country);
+            }
+        }
     }
 
     componentDidMount(){
@@ -72,7 +92,7 @@ export default class customerDashboard extends  Component {
                                             <br/>
                                             <br/>
                                             <h5>
-                                                Branch:  {this.state.branch} <br/><br/>
+                                                Branch:  {this.getBranch()} <br/><br/>
                                                 Wallet balance: {this.state.balance} <br/><br/>
                                                 <AddMoney balance={this.state.balance}/>
                                             </h5>

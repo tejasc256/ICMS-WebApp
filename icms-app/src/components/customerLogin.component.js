@@ -50,8 +50,11 @@ export default class customerLogin extends  Component {
         });
     }
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div style={{marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"}}>
+            <div style={myStyle}>
                <h3>Customer Login</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">

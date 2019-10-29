@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { Form, Button } from 'react-bootstrap';
 
+
 export default class editProfile extends  Component {
     constructor(props){
         super(props);
@@ -10,13 +11,15 @@ export default class editProfile extends  Component {
         this.state = {
             firstname: '',
             lastname: '',
-            dob: ''
+            branches: [],
+            chosenbranch: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
         this.onChangeLastName = this.onChangeLastName.bind(this);
-        this.onChangeDOB = this.onChangeDOB.bind(this);
+        this.populateBranches = this.populateBranches.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
     }
 
 
@@ -32,11 +35,17 @@ export default class editProfile extends  Component {
         });
     }
 
-    onChangeDOB(e){
+    onChangeBranch(e){
         this.setState({
-            dob: e.target.value
+            chosenbranch: e.target.value
         });
-        console.log(this.state.dob);
+        console.log(this.state.chosenbranch);
+    }
+
+    populateBranches(){
+        return this.state.branches.map(function(current, i) {
+            return(<option value={current.branch_id}>{current.city}</option>)
+        });
     }
 
     componentDidMount(){
@@ -45,7 +54,17 @@ export default class editProfile extends  Component {
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,
-                dob: response.data[0].dob
+                chosenbranch: response.data[0].branch
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            console.log(response.data);
+            this.setState({
+                branches: response.data
             });
         })
         .catch(err => {
@@ -55,8 +74,8 @@ export default class editProfile extends  Component {
 
     onSubmit(e){
         e.preventDefault();
-        axios.post('http://localhost:4000/customer/editprofile', {firstname: this.state.firstname, lastname: this.state.lastname, dob: this.state.dob}, {withCredentials: true}).then(response => {
-            console.log(this.state.dob);
+        console.log(this.state.firstname + this.state.lastname);
+        axios.post('http://localhost:4000/customer/editprofile', {firstname: this.state.firstname, lastname: this.state.lastname, branch: this.state.chosenbranch}, {withCredentials: true}).then(response => {
             this.props.history.push("/dashboard");
         }).catch(function(err) {
             console.log(err);
@@ -70,24 +89,23 @@ export default class editProfile extends  Component {
             <div style={MyStyle}>
                 <h3>Edit Profile</h3>
                 <Form>
-                <Form.Group controlId="formBasicEmail">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control type="text" defaultValue={this.state.firstname} onChange={this.onChangeFirstName} />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control type="text" defaultValue={this.state.lastname} onChange={this.onChangeLastName}/>
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                <Form.Label>Date of Birth</Form.Label>
-                <Form.Control type="date" defaultValue={this.state.dob} onChange={this.onChangeDOB}/>
-                </Form.Group>
-
-                <Button variant="primary" type="submit">
-                Edit Profile
-                </Button>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Control type="text" defaultValue={this.state.firstname} onChange={this.onChangeFirstName} />
+                    </Form.Group>
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Control type="text" defaultValue={this.state.lastname} onChange={this.onChangeLastName}/>
+                    </Form.Group>
+                    <Form.Group controlId="formGridState">
+                        <Form.Label>Branch</Form.Label>
+                        <Form.Control as="select" onChange={this.onChangeBranch}>
+                            {this.populateBranches()}
+                        </Form.Control>
+                    </Form.Group>
+                    <Button variant="primary" onClick={this.onSubmit}>
+                        Edit Profile
+                    </Button>
                 </Form>
             </div>
         );

@@ -57,6 +57,10 @@ export default class HomePage extends  Component {
                             We are a business with strong social relevance and contribute to society by supporting causes in health and well-being.
                         </h5>
                 </Jumbotron>
+                <Jumbotron style={{textAlign: "center", margin: "0%", backgroundColor: "white", paddingLeft: "7%", paddingRight: "7%"}} fluid>
+                    Trade logos displayed above belong to Chaddah Choudhary Insurance and Claim Company and are used by CCICC under a license.
+                    Insurance is the subject matter of the solicitation. The advertisement contains only an indication of cover offered. For more details on risk factors, terms, conditions and exclusions, please read the sales brochure carefully before concluding a sale. CCICC, Mega Tower 3, NITK Boys Hostel, National Institute of Technology Karanataka, Surathkal, Karanataka - 575025. Reg. No.250. Phone No: +91 88610 88642
+                </Jumbotron>
             </div>
         );
     }
