@@ -23,6 +23,7 @@ import ManagerLogin from "./components/managerLogin.component";
 import ManagerDashboard from "./components/managerDashboard.component";
 import ViewAgent from "./components/viewAgent.component";
 import CreateAgent from './components/createAgent.component';
+import CreateInvestigator from './components/createInvestigator.component';
 
 class App extends Component {
     render(){
@@ -79,6 +80,7 @@ class App extends Component {
                     <Route path = "/manager/dashboard" component = {ManagerDashboard}/>
                     <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
                     <Route path = "/create/agent" component = {CreateAgent} />
+                    <Route path = "/create/investigator" component = {CreateInvestigator} />
                 </Router>
             );
         }

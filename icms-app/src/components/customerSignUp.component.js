@@ -75,7 +75,7 @@ export default class customerSignUp extends  Component {
                    <div className="form-group">
                        <label>Password: </label>
                        <input
-                               type="text"
+                               type="password"
                                className="form-control"
                                value={this.state.cust_password}
                                onChange={this.onChangeCustPassword}
@@ -84,7 +84,7 @@ export default class customerSignUp extends  Component {
                    <div className="form-group">
                        <label>Confirm Password: </label>
                        <input
-                               type="text"
+                               type="password"
                                className="form-control"
                                value={this.state.cust_password2}
                                onChange={this.onChangeCustPassword2}

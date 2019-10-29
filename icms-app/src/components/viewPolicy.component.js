@@ -68,6 +68,7 @@ export default class ViewPolicy extends Component {
                 if(response.data.isSuccess === 0){
                     alert('Please add sufficient money to your wallet');
                 }
+                this.handleClose();
                 this.props.history.push("/dashboard");
             }
         })

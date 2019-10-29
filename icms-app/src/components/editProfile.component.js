@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import{ Form, Button } from 'react-bootstrap';
+
 export default class editProfile extends  Component {
     constructor(props){
         super(props);
@@ -9,36 +11,59 @@ export default class editProfile extends  Component {
             firstname: '',
             lastname: '',
             dob: '',
-            branch: ''
+            branch: '',
+            branches: []
         }
 
         this.onSubmit = this.onSubmit.bind(this);
-        this.onChangeCustEmail = this.onChangeCustEmail.bind(this);
-        this.onChangeCustPassword = this.onChangeCustPassword.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.onChangeFirstName = this.onChangeFirstName.bind(this);
+        this.onChangeLastName = this.onChangeLastName.bind(this);
+        this.populateBranches = this.populateBranches.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
+        this.onChangeDOB = this.onChangeDOB.bind(this);
     }
 
-    handleChange(e){
-        this.setState({
-            [e.target.name]: e.target.value
+    componentDidMount(){
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            console.log(response.data);
+            this.setState({
+                branches: response.data
+            });
+        })
+        .catch(err => {
+            console.log(err);
         });
     }
 
-    onChangeCustEmail(e){
+    onChangeFirstName(e){
         this.setState({
-            cust_email: e.target.value
+            firstname: e.target.value
         });
     }
 
-    onChangeCustEmail(e){
+    onChangeLastName(e){
         this.setState({
-            cust_email: e.target.value
+            lastname: e.target.value
         });
     }
 
-    onChangeCustPassword(e){
+    onChangeBranch(e){
         this.setState({
-            cust_password: e.target.value
+            branch: e.target.value
+        });
+        console.log(this.state.branch);
+    }
+
+    onChangeDOB(e){
+        this.setState({
+            dob: e.target.value
+        });
+    }
+
+    populateBranches(){
+        return this.state.branches.map(function(current, i) {
+            return(<option value={current.branch_id}>{current.city}</option>)
         });
     }
 
@@ -51,47 +76,35 @@ export default class editProfile extends  Component {
             console.log(err);
         });
     }
+
     render(){
         return (
             <div>
-                <h3>Edit Profile</h3>
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label>First Name: </label>
-                        <input name="firstname" type="text"
-                            className="form-control"
-                            value={this.state.firstname}
-                            onChange={this.handleChange}
-                            />
-                    </div>
-                    <div className="form-group">
-                        <label>Last Name: </label>
-                        <input name="lastname" type="text"
-                            className="form-control"
-                            value={this.state.lastname}
-                            onChange={this.handleChange}
-                            />
-                    </div>
-                    <div className="form-group">
-                        <label>Date of Birth: </label>
-                        <input name="dob" type="text"
-                            className="form-control"
-                            value={this.state.dob}
-                            onChange={this.handleChange}
-                            />
-                    </div>
-                    <div className="form-group">
-                        <label>Branch</label>
-                        <input name ="branch" type="text"
-                            className="form-control"
-                            value={this.state.branch}
-                            onChange={this.handleChange}
-                            />
-                    </div>
-                    <div className="form-group">
-                        <input type="submit" value="Edit" className="btn btn-primary" />
-                    </div>
-                </form>
+                <h3>Profile Details</h3>
+                    <Form>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Control type="text" onChange={this.onChangeFirstName} />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Control type="text" onChange={this.onChangeLastName}/>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Date of Birth Name</Form.Label>
+                            <Form.Control type="date" onChange={this.onChangeDOB}/>
+                        </Form.Group>
+                        <Form.Group controlId="formGridState">
+                            <Form.Label>Branch</Form.Label>
+                            <Form.Control as="select" onChange={this.onChangeBranch}>
+                                <option>Choose Branch...</option>
+                                {this.populateBranches()}
+                            </Form.Control>
+                        </Form.Group>
+                        <Button variant="primary" onClick={this.onSubmit}>
+                            Set Up Profile
+                        </Button>
+                    </Form>
             </div>
         );
     }

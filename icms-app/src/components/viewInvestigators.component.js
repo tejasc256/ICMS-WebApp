@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { Button } from 'react-bootstrap';
 
-class Agent extends Component {
+class Investigator extends Component {
     constructor(props){
         super(props);
 
-        this.deleteAgent = this.deleteAgent.bind(this);
+        this.deleteInvestigator = this.deleteInvestigator.bind(this);
     }
 
-    deleteAgent(){
-        axios.delete('http://localhost:4000/agent/'+this.props.agent.agent_id)
+    deleteInvestigator(){
+        axios.delete('http://localhost:4000/investigator/'+this.props.investigator.inv_id, {withCredentials: true})
         .then(response => {
             console.log(response);
             //Display Toast
@@ -25,13 +25,11 @@ class Agent extends Component {
     render(){
         return(
             <tr>
-                <td>{this.props.agent.agent_id}</td>
-                <td>{this.props.agent.firstname}</td>
-                <td>{this.props.agent.lastname}</td>
-                <td>{this.props.agent.branch}</td>
-                <td>{this.props.agent.commission}</td>
+                <td>{this.props.investigator.inv_id}</td>
+                <td>{this.props.investigator.firstname}</td>
+                <td>{this.props.investigator.lastname}</td>
                 <td>
-                    <Button variant="danger" onClick={this.deleteAgent}>Delete Agent</Button>
+                    <Button variant="danger" onClick={this.deleteInvestigator}>Delete Investigator</Button>
                 </td>
             </tr>
         );
@@ -41,18 +39,17 @@ class Agent extends Component {
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
-        this.state = {agents: []};
+        this.state = {investigators: []};
 
         this.fetchData = this.fetchData.bind(this);
-        this.agentList = this.agentList.bind(this);
+        this.investigatorList = this.investigatorList.bind(this);
     }
 
 
     fetchData(){
-        axios.get('http://localhost:4000/manager', {withCredentials: true})
+        axios.get('http://localhost:4000/investigator/all', {withCredentials: true})
             .then(response => {
-                console.log(response);
-                this.setState({ agents: response.data });
+                this.setState({ investigators: response.data });
             })
             .catch(function (error){
                 console.log(error);
@@ -64,29 +61,27 @@ export default class OtherPage extends  Component {
         this.timer = setInterval(() => this.fetchData(), 250);
     }
 
-    agentList() {
-        return this.state.agents.map(function(currentAgent, i){
-            return (<Agent agent={currentAgent} key={i} />);
+    investigatorList() {
+        return this.state.investigators.map(function(currentAgent, i){
+            return (<Investigator investigator={currentAgent} key={i} />);
             })
     }
 
     render(){
         return (
             <div>
-                <h3>Agent List</h3>
+                <h3>Investigators List</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>
                         <tr>
-                            <th>Agent ID</th>
+                            <th>Investigator ID</th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Branch</th>
-                            <th>Commission</th>
-                            <th>Delete Agent</th>
+                            <th>Delete Investigator</th>
                         </tr>
                     </thead>
                     <tbody>
-                        { this.agentList() }
+                        { this.investigatorList() }
                     </tbody>
                 </table>
             </div>

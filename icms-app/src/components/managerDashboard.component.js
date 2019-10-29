@@ -5,6 +5,7 @@ import { Button, Form } from 'react-bootstrap';
 import Popup from 'reactjs-popup';
 
 import ViewAgents from './viewAgents.component';
+import ViewInvestigators from './viewInvestigators.component';
 
 export default class managerDashboard extends  Component {
     constructor(props){
@@ -22,7 +23,6 @@ export default class managerDashboard extends  Component {
     componentDidMount(){
         axios.get('http://localhost:4000/manager/profile', {withCredentials: true})
         .then(response => {
-            console.log(response)
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,
@@ -53,7 +53,8 @@ export default class managerDashboard extends  Component {
                    <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
                    {this.state.branch} <br/>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
-                       <Button variant="primary" href="/create/agent">Create Agent</Button>
+                       <Button variant="primary" href="/create/agent">Create Agent</Button><br/>
+                       <Button variant="primary" href="/create/investigator">Create Investigator</Button>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -61,10 +62,14 @@ export default class managerDashboard extends  Component {
                            <li className="navbar-item">
                            <Link to="/agents" className="nav-link">View Agents</Link>
                            </li>
+                           <li className="navbar-item">
+                           <Link to="/investigators" className="nav-link">View Investigators</Link>
+                           </li>
                        </ul>
                    </nav>
                </div>
                <Route path = "/agents" component = {ViewAgents} />
+               <Route path = "/investigators" component = {ViewInvestigators} />
             </Router>
         );
     }
