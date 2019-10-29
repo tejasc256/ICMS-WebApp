@@ -120,3 +120,14 @@ exports.create_customer_email = function(req, res) {
         }
     });
 };
+
+exports.edit_customer_profile = function(req, res) {
+    sql.query("update customer set firstname = ?, lastname = ?, dob = ? where cid = ?", [req.body.firstname, req.body.lastname, req.body.dob, req.session.cid], function(err, result) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            res.send(result);
+        }
+    });
+};

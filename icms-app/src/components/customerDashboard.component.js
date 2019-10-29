@@ -8,6 +8,7 @@ import CustomerPolicies from "./customerPolicies.component";
 import CustomerClaims from "./customerClaims.component";
 import CustomerRequests from "./customerRequests.component";
 import AddMoney from "./addMoney.component";
+import EditProfile from "./editProfilefromDash.component";
 
 export default class customerDashboard extends  Component {
     constructor(props){
@@ -97,6 +98,9 @@ export default class customerDashboard extends  Component {
                                    <li className="navbar-item">
                                    <Link to="/myrequests" className="nav-link">My Requests</Link>
                                    </li>
+                                   <li className="navbar-item">
+                                   <Link to="dashboard/editprofile" className="nav-link">Edit Profile</Link>
+                                   </li>
                                </ul>
                            </div>
                        </div>
@@ -105,6 +109,7 @@ export default class customerDashboard extends  Component {
                <Route path = "/mypolicies" component = {CustomerPolicies} />
                <Route path = "/myclaims" component = {CustomerClaims} />
                <Route path = "/myrequests" component = {CustomerRequests} />
+               <Route path = "/dashboard/editprofile" component = {EditProfile} />
             </Router>
 
         );

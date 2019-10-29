@@ -30,11 +30,18 @@ export default class editProfile extends  Component {
         });
     }
 
+    onChangeCustEmail(e){
+        this.setState({
+            cust_email: e.target.value
+        });
+    }
+
     onChangeCustPassword(e){
         this.setState({
             cust_password: e.target.value
         });
     }
+
 
     onSubmit(e){
         e.preventDefault();
@@ -46,46 +53,46 @@ export default class editProfile extends  Component {
     }
     render(){
         return (
-            <div style={{marginTop: 10}}>
-               <h3>Edit Profile</h3>
-               <form onSubmit={this.onSubmit}>
-                   <div className="form-group">
-                       <label>First Name: </label>
-                       <input name="firstname" type="text"
-                               className="form-control"
-                               value={this.state.firstname}
-                               onChange={this.handleChange}
-                               />
-                   </div>
-                   <div className="form-group">
-                       <label>Last Name: </label>
-                       <input name="lastname" type="text"
-                               className="form-control"
-                               value={this.state.lastname}
-                               onChange={this.handleChange}
-                               />
-                   </div>
-                   <div className="form-group">
-                       <label>Date of Birth: </label>
-                       <input name="dob" type="text"
-                               className="form-control"
-                               value={this.state.dob}
-                               onChange={this.handleChange}
-                               />
-                   </div>
-                   <div className="form-group">
-                       <label>Branch</label>
-                       <input name ="branch" type="text"
-                               className="form-control"
-                               value={this.state.branch}
-                               onChange={this.handleChange}
-                               />
-                   </div>
-                   <div className="form-group">
-                       <input type="submit" value="Edit" className="btn btn-primary" />
-                   </div>
-               </form>
-           </div>
+            <div>
+                <h3>Edit Profile</h3>
+                <form onSubmit={this.onSubmit}>
+                    <div className="form-group">
+                        <label>First Name: </label>
+                        <input name="firstname" type="text"
+                            className="form-control"
+                            value={this.state.firstname}
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <label>Last Name: </label>
+                        <input name="lastname" type="text"
+                            className="form-control"
+                            value={this.state.lastname}
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <label>Date of Birth: </label>
+                        <input name="dob" type="text"
+                            className="form-control"
+                            value={this.state.dob}
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <label>Branch</label>
+                        <input name ="branch" type="text"
+                            className="form-control"
+                            value={this.state.branch}
+                            onChange={this.handleChange}
+                            />
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Edit" className="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
         );
     }
 }

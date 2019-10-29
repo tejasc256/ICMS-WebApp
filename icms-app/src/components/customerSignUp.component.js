@@ -66,7 +66,7 @@ export default class customerSignUp extends  Component {
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
                        <label>Email: </label>
-                       <input  type="text"
+                       <input  type="email"
                                className="form-control"
                                value={this.state.cust_email}
                                onChange={this.onChangeCustEmail}

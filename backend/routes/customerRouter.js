@@ -17,13 +17,15 @@ router.get('/policies', auth, customerController.view_customer_policies);
 router.get('/claims', auth, customerController.view_customer_claims);
 router.get('/profile', auth, customerController.view_customer_profile);
 router.post('/signup', customerController.create_customer_email);
-
-router.get('/', customerController.list_all_customers);
-router.post('/', customerController.create_a_customer);
+router.post('/editprofile', auth, customerController.edit_customer_profile);
 
 router.get('/:cid', customerController.read_a_customer);
 router.put('/:cid', customerController.update_a_customer);
 router.delete('/:cid', customerController.delete_a_customer);
+
+router.get('/', customerController.list_all_customers);
+router.post('/', customerController.create_a_customer);
+
 
 router.post('/addmoney', auth, function(req, res) {
     console.log('Updating money of ' + req.session.cid + ' amount ' + req.body.addedmoney);
