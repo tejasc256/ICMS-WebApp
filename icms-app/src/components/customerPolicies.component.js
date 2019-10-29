@@ -10,7 +10,7 @@ const Policy = props => (
         <td>{props.policy.premium}</td>
         <td>{props.policy.duration}</td>
         <td>
-            <Link to={"/viewpol/"+props.policy.pid}>Make Claim</Link>
+            <Link to={"/policy_claim/"+props.policy.pid}>Make Claim</Link>
         </td>
     </tr>
 )

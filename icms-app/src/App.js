@@ -14,6 +14,11 @@ import ViewAgents from "./components/viewAgents.component";
 import PolicyChart from "./components/policyChart.component";
 import Customerbranchchart from "./components/customerbranchchart.component";
 import RequestperagentChart from "./components/requestsperagentchart.component";
+import ClaimsPolicyChart from "./components/claimsperpolicychart.component";
+import ClaimsInvestigatorChart from "./components/claimsperinvestigator.component";
+import AgentManagerChart from "./components/agentspermanagerchart.component";
+import ClaimsBranchChart from "./components/claimsperbranchchart.component";
+import claimsCustomerChart from "./components/claimspercustomerchart.component";
 
 class App extends Component {
     render(){
@@ -53,6 +58,12 @@ class App extends Component {
                 <Route path = "/ceo/policychart" component = {PolicyChart}/>
                 <Route path = "/ceo/customerbranchcountchart" component = {Customerbranchchart}/>
                 <Route path = "/ceo/requestsperagent" component = {RequestperagentChart}/>
+                <Route path = "/ceo/claimsperpolicychart" component = {ClaimsPolicyChart}/>
+                <Route path = "/ceo/claimsperinvestigatorchart" component = {ClaimsInvestigatorChart}/>
+                <Route path = "/ceo/agentspermanagerchart" component = {AgentManagerChart}/>
+                <Route path = "/ceo/claimsperbranchchart" component = {ClaimsBranchChart}/>
+                <Route path = "/ceo/claimspercustomerchart" component = {claimsCustomerChart}/>
+
                     </div>
 
             </Router>

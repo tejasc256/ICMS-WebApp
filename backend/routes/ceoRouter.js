@@ -3,18 +3,6 @@ var router = express.Router();
 
 var sql = require('../model/db');
 
-router.get('/', function(req, res) {
-    sql.query("select * from manager", function(err , result) {
-        if(err){
-            console.log(err);
-            throw err;
-        }
-        else{
-            res.send(result);
-        }
-    });
-});
-
 router.get('/policychart', function(req, res) {
     sql.query("select count(*) as count from policy group by type", function(err , result) {
         if(err){
@@ -51,8 +39,57 @@ router.get('/requestsperagentchart', function(req, res) {
     });
 });
 
+// router.get('/invchart', function(req, res) {
+//     sql.query("select inv_id,count(*) from investigates group by inv_id", function(err , result) {
+//         if(err){
+//             console.log(err);
+//             throw err;
+//         }
+//         else{
+//             res.send(result);
+//         }
+//     });
+// });
+
 router.get('/claimsperpolicychart', function(req, res) {
-    sql.query("select count(*) from claims group by pid", function(err , result) {
+    sql.query("select pid,count(*) from claims group by pid", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+router.get('/agentspermanager', function(req, res) {
+    sql.query("select mgr_id,count(*) from agent group by mgr_id", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+router.get('/claimsperbranch', function(req, res) {
+    sql.query("select customer.branch,count(*) from (claims inner join customer on claims.cid = customer.cid) group by customer.branch", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+
+router.get('/claimspercustomer', function(req, res) {
+    sql.query("select customer.cid,count(*) from (claims inner join customer on claims.cid = customer.cid) group by customer.cid", function(err , result) {
         if(err){
             console.log(err);
             throw err;
@@ -74,5 +111,19 @@ router.get('/claimsperinvestigatorchart', function(req, res) {
         }
     });
 });
+
+router.get('/', function(req, res) {
+    sql.query("select * from manager", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+
 
 module.exports = router;
