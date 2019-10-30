@@ -98,8 +98,11 @@ export default class customerSignUp extends  Component {
         }
     }
     render(){
+        const MyStyle = {
+            width: "50%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={MyStyle}>
                <h3>Create Agent</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">

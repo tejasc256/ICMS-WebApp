@@ -37,17 +37,18 @@ export default class managerLogin extends  Component {
                 this.props.history.push("/manager/dashboard");
             }
             else{
-                this.setState({
-                    email: response.data
-                });
+                alert('Please Check Credentials');
             }
         }).catch(function(err) {
             console.log(err);
         });
     }
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={myStyle}>
                <h3>Manager Login</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">

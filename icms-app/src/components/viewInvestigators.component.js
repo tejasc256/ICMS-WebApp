@@ -68,8 +68,11 @@ export default class OtherPage extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div>
+            <div style={MyStyle}>
                 <h3>Investigators List</h3>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>

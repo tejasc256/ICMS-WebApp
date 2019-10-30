@@ -100,21 +100,21 @@ class App extends Component {
                     <Route path = "/" exact component = {HomePage}/>
                     <Route path = "/other" component = {OtherPage}/>
                     <Route path = "/login" component = {CustomerLogin}/>
+                    <Route path = "/agent/login" component = {AgentLogin}/>
+                    <Route path = "/manager/login" component = {ManagerLogin}/>
+                    <Route path = "/investigator/login" component = {InvestigatorLogin}/>
                     <Route path = "/policies/home" component = {HomePolicies}/>
                     <Route path = "/policies/life" component = {LifePolicies}/>
                     <Route path = "/policies/health" component = {HealthPolicies}/>
                     <Route path = "/policies/all" component = {ViewPoliciesFancy}/>
                     <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
                     <Route path = "/dashboard" component = {CustomerDashboard}/>
-                    <Route path = "/claims" component = {ViewClaims}/>
+                    <Route path = "investigator/claims" component = {ViewClaims}/>
                     <Route path = "/ceo/dashboard" component = {ViewManagers}/>
                     <Route path = "/signup" component = {CustomerSignUp}/>
                     <Route path = "/editprofile" component = {EditProfile}/>
                     <Route path = "/agent/dashboard" component = {AgentDashboard}/>
-                    <Route path = "/agent/login" component = {AgentLogin}/>
-                    <Route path = "/investigator/login" component = {InvestigatorLogin}/>
                     <Route path = "/investigator/dashboard" component = {InvestigatorDashboard}/>
-                    <Route path = "/manager/login" component = {ManagerLogin}/>
                     <Route path = "/manager/dashboard" component = {ManagerDashboard}/>
                     <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
                     <Route path = "/create/agent" component = {CreateAgent} />

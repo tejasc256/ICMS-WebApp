@@ -37,9 +37,9 @@ export default class customerDashboard extends  Component {
     fetchData(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
         .then(response => {
-            if(response.data === 'AuthFail'){
-                this.props.history.push("/");
-            }
+            // if(response.data === 'AuthFail'){
+            //     this.props.history.push("/");
+            // }
             var bal = this.numberWithCommas(response.data[0].balance);
             this.setState({
                 firstname: response.data[0].firstname,
