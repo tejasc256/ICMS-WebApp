@@ -39,7 +39,7 @@ export default class managerDashboard extends  Component {
     userSignOut(){
         axios.get('http://localhost:4000/login/logout', {withCredentials: true})
         .then(response => {
-            this.props.history.push("/login");
+            this.props.history.push("/");
         })
         .catch(function(err) {
             console.log(err);

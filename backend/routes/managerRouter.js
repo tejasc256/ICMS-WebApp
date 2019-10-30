@@ -23,6 +23,7 @@ router.get('/profile', auth, function(req, res) {
     });
 });
 
+
 router.post('/changebranch', auth, function(req, res) {
     sql.query("update agent set branch = ? where agent_id = ?", [req.body.branch, req.body.agent_id], function(err, result) {
         if(err){
