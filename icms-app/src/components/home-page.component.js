@@ -41,7 +41,7 @@ export default class HomePage extends  Component {
                     </h5>
                     <br/><br/>
                     <p>
-                        <Button variant="primary" size="lg" href="/policies">View Policies</Button>
+                        <Button variant="primary" size="lg" href="/policies/all">View Policies</Button>
                     </p>
                 </Jumbotron>
                 <Jumbotron className="bg-primary" style={{textAlign: "center", margin: "0%"}} fluid>

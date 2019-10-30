@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
 
+import { Form } from 'react-bootstrap';
+
 export default class customerSignUp extends  Component {
     constructor(props){
         super(props);
@@ -14,7 +16,8 @@ export default class customerSignUp extends  Component {
             firstname: '',
             lastname: '',
             commission: 0,
-            branch: ''
+            branch: '',
+            branches: []
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -25,6 +28,7 @@ export default class customerSignUp extends  Component {
         this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeBranch = this.onChangeBranch.bind(this);
         this.onChangeCommission = this.onChangeCommission.bind(this);
+        this.populateBranches = this.populateBranches.bind(this);
     }
 
     onChangeCustEmail(e){
@@ -68,12 +72,47 @@ export default class customerSignUp extends  Component {
             branch: e.target.value
         })
     }
+
+    populateBranches(){
+        return this.state.branches.map(function(current, i) {
+            return(<option value={current.branch_id}>{current.city}</option>)
+        });
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            console.log(response.data);
+            this.setState({
+                branches: response.data
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
     onSubmit(e){
         e.preventDefault();
 
         if(this.state.cust_password !== this.state.cust_password2){
             this.setState({
                 message: 'Passwords dont match'
+            });
+        }
+        else if(this.state.commission > 100 || this.state.commission <= 0){
+            this.setState({
+                message: 'Commission has to be positive'
+            });
+        }
+        else if(!this.state.firstname || !this.state.lastname){
+            this.setState({
+                message: 'Names cannot be null'
+            });
+        }
+        else if(!this.state.branch){
+            this.setState({
+                message: 'Please Choose Branch'
             });
         }
         else{
@@ -98,8 +137,11 @@ export default class customerSignUp extends  Component {
         }
     }
     render(){
+        const MyStyle = {
+            width: "50%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={MyStyle}>
                <h3>Create Agent</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
@@ -156,15 +198,13 @@ export default class customerSignUp extends  Component {
                                onChange={this.onChangeCommission}
                                />
                    </div>
-                   <div className="form-group">
-                       <label>Branch </label>
-                       <input
-                               type="text"
-                               className="form-control"
-                               value={this.state.branch}
-                               onChange={this.onChangeBranch}
-                               />
-                   </div>
+                   <Form.Group controlId="formGridState">
+                       <Form.Label>Branch</Form.Label>
+                       <Form.Control as="select" onChange={this.onChangeBranch}>
+                           <option>Choose Branch...</option>
+                           {this.populateBranches()}
+                       </Form.Control>
+                   </Form.Group>
                    <div>
                         {this.state.message}
                    </div>

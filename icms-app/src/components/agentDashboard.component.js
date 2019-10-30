@@ -15,10 +15,12 @@ export default class agentDashboard extends  Component {
             lastname: '',
             branch: '',
             commission: '',
-            mgr_id: ''
+            mgr_id: '',
+            branches: []
         }
 
         this.userSignOut = this.userSignOut.bind(this);
+        this.getBranch = this.getBranch.bind(this);
     }
 
     componentDidMount(){
@@ -37,12 +39,30 @@ export default class agentDashboard extends  Component {
         }).catch(function(err){
             console.log(err + 'bulla');
         });
+
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            this.setState({
+                branches: response.data
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    getBranch(){
+        for(var i=0; i<this.state.branches.length; i++){
+            if(this.state.branches[i].branch_id === this.state.branch){
+                return (this.state.branches[i].city + ', ' + this.state.branches[i].country);
+            }
+        }
     }
 
     userSignOut(){
         axios.get('http://localhost:4000/login/logout', {withCredentials: true})
         .then(response => {
-            this.props.history.push("/login");
+            this.props.history.push("/");
         })
         .catch(function(err) {
             console.log(err);
@@ -50,29 +70,25 @@ export default class agentDashboard extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
             <Router>
-                <div style={{marginTop: 10}}>
+                <div style={MyStyle}>
                     <h3>
                         Agent Dashboard
                     </h3>
-                   <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
-                   {this.state.branch} <br/>
-                   {this.state.commission} <br/>
-                   {this.state.mgr_id} <br/>
-                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
-               </div>
-               <div className="container">
-                   <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                       <ul className="navbar-nav mr-auto">
-                           <li className="navbar-item">
-                           <Link to="/requests" className="nav-link">Pending Requests</Link>
-                           </li>
-                       </ul>
-                   </nav>
-               </div>
-               <Route path = "/requests" component = {PendingRequests} />
-            </Router>
-        );
-    }
+                    <h5>Welcome {this.state.firstname} {this.state.lastname}</h5><br/>
+                    Branch: {this.getBranch()} <br/>
+                Commission: {this.state.commission} %<br/>
+            Manager ID: {this.state.mgr_id} <br/><br/>
+        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
+    </div>
+    <div>
+        <PendingRequests />
+    </div>
+</Router>
+);
+}
 }

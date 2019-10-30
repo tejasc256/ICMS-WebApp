@@ -75,11 +75,20 @@ export default class editProfile extends  Component {
     onSubmit(e){
         e.preventDefault();
         console.log(this.state.firstname + this.state.lastname);
-        axios.post('http://localhost:4000/customer/editprofile', {firstname: this.state.firstname, lastname: this.state.lastname, branch: this.state.chosenbranch}, {withCredentials: true}).then(response => {
-            this.props.history.push("/dashboard");
-        }).catch(function(err) {
-            console.log(err);
-        });
+        if(!this.state.firstname || !this.state.lastname){
+            alert('Enter Name');
+        }
+        else if(!this.state.chosenbranch || this.state.chosenbranch === 'Choose Branch..'){
+            alert('Choose Branch');
+        }
+        else{
+            axios.post('http://localhost:4000/customer/editprofile', {firstname: this.state.firstname, lastname: this.state.lastname, branch: this.state.chosenbranch}, {withCredentials: true}).then(response => {
+                this.props.history.push("/dashboard");
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+
     }
     render(){
         const MyStyle = {
@@ -100,6 +109,7 @@ export default class editProfile extends  Component {
                     <Form.Group controlId="formGridState">
                         <Form.Label>Branch</Form.Label>
                         <Form.Control as="select" onChange={this.onChangeBranch}>
+                            <option>Choose Branch..</option>
                             {this.populateBranches()}
                         </Form.Control>
                     </Form.Group>
