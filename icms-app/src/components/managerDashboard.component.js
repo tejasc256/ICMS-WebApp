@@ -23,6 +23,9 @@ export default class managerDashboard extends  Component {
     componentDidMount(){
         axios.get('http://localhost:4000/manager/profile', {withCredentials: true})
         .then(response => {
+            if(response.data === 'AuthFail'){
+                this.props.history.push("/");
+            }
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,

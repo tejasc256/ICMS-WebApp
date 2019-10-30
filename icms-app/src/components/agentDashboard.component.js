@@ -24,7 +24,9 @@ export default class agentDashboard extends  Component {
     componentDidMount(){
         axios.get('http://localhost:4000/agent/profile', {withCredentials: true})
         .then(response => {
-            console.log(response)
+            if(response.data === 'AuthFail'){
+                this.props.history.push("/");
+            }
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,

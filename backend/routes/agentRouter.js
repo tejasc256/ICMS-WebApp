@@ -14,7 +14,7 @@ var auth = function(req, res, next) {
     }
 };
 
-router.get('/profile', agentController.read_a_agent);
+router.get('/profile', auth, agentController.read_a_agent);
 router.get('/fulfill/:rid',auth, function(req, res) {
     sql.query("insert into agent_requests values (?,?)", [req.session.agent_id, req.params.rid], function(err , result) {
         if(err){
