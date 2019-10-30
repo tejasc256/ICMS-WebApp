@@ -10,6 +10,8 @@ import CustomerRequests from "./customerRequests.component";
 import AddMoney from "./addMoney.component";
 import EditProfile from "./editProfilefromDash.component";
 
+import desk from "../images/desk.jpg";
+
 export default class customerDashboard extends  Component {
     constructor(props){
         super(props);
@@ -84,7 +86,9 @@ export default class customerDashboard extends  Component {
         return (
             <Router>
                 <div>
-                    <Jumbotron style={{backgroundColor: "#f5efed", alignItems: "center", margin:"0%"}} fluid>
+                    <Jumbotron style={{background: "url('/images/desk2.jpg')", backgroundSize: "cover", alignItems: "center", margin:"0%"}} fluid>
+                        <br/>
+                        <br/>
                             <Container>
                                 <Row>
                                     <Col md={10}>
@@ -98,7 +102,7 @@ export default class customerDashboard extends  Component {
                                             </h5>
                                     </Col>
                                     <Col md={2}>
-                                        <Button variant="info" onClick={this.userSignOut}>Sign Out</Button><br/>
+                                        <Button variant="success" size="lg" onClick={this.userSignOut}>Sign Out</Button><br/>
                                     </Col>
                                 </Row>
                             </Container>

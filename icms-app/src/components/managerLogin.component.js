@@ -8,7 +8,7 @@ export default class managerLogin extends  Component {
 
         this.state = {
             email: '',
-            passwordssword: '',
+            password: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -63,7 +63,7 @@ export default class managerLogin extends  Component {
                        <input
                                type="password"
                                className="form-control"
-                               value={this.state.passwordsswod}
+                               value={this.state.password}
                                onChange={this.onChangeCustPassword}
                                />
                    </div>

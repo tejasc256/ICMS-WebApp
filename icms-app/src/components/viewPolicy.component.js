@@ -98,10 +98,10 @@ export default class ViewPolicy extends Component {
     render() {
         return (
             <div>
-                <Button onClick={this.handleOpen} variant="primary">Buy Policy</Button>
+                <Button onClick={this.handleOpen} variant="primary">View More Details</Button>
                 <Modal show={this.state.showModal} onHide={this.handleClose}>
-                    <div>
-                        <h3 align="center">Buy Policy</h3>
+                    <div style={{marginTop: "5%", marginLeft: "10%", marginRight: "10%", marginBottom: "5%"}}>
+                        <h3 align="center">{this.state.name}</h3>
                         <form onSubmit={this.onSubmit}>
                             <div className="form-group">
                                 <label>PID: </label>
@@ -135,7 +135,7 @@ export default class ViewPolicy extends Component {
                                         />
                             </div>
                             <br />
-                            <h3>Attributes List</h3>
+                            <h3>Coverage</h3>
                             <table className="table table-striped" style={{ marginTop: 20 }} >
                                 <thead>
                                     <tr>

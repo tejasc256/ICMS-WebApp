@@ -13,16 +13,16 @@ export default class HomePage extends  Component {
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={family1}
-                            alt="First slide"
+                            src={family2}
+                            alt="Third slide"
                             style={{height:"600px", width:"100%"}}
                             />
                     </Carousel.Item>
                     <Carousel.Item>
                         <img
                             className="d-block w-100"
-                            src={family2}
-                            alt="Third slide"
+                            src={family1}
+                            alt="First slide"
                             style={{height:"600px", width:"100%"}}
                             />
                     </Carousel.Item>
@@ -41,7 +41,7 @@ export default class HomePage extends  Component {
                     </h5>
                     <br/><br/>
                     <p>
-                        <Button variant="primary">View Policies</Button>
+                        <Button variant="primary" size="lg" href="/policies">View Policies</Button>
                     </p>
                 </Jumbotron>
                 <Jumbotron className="bg-primary" style={{textAlign: "center", margin: "0%"}} fluid>

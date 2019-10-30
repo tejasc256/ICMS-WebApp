@@ -104,7 +104,7 @@ router.post('/manager', function(req, res) {
         else{
             if(result.length == 1){
                 console.log(result[0].mgr_id);
-                if(req.sesson){
+                if(req.session){
                     req.session.destroy(err => {
                         if(err){
                             return console.log(err);
@@ -121,6 +121,31 @@ router.post('/manager', function(req, res) {
             }
         }
     });
+});
+
+router.post('/ceo', function(req, res) {
+    if(req.body.email === 'ceo'){
+        if(req.body.password === 'ceo'){
+            // if(req.session){
+            //     req.session.destroy(err => {
+            //         if(err){
+            //             return console.log(err);
+            //         }
+            //         res.send("logged out");
+            //     });
+            // }
+            // console.log(req);
+            // req.session.ceo_id = 1;
+            req.session.ceo = true;
+            res.send("AuthPass");
+        }
+        else{
+            res.send("AuthFail");
+        }
+    }
+    else{
+        res.send("AuthFail");
+    }
 });
 
 router.get('/testpage', auth, function(req, res) {
@@ -143,6 +168,9 @@ router.get('/testpage', auth, function(req, res) {
     }
     else if(req.session.manager){
         res.send('Manager ' + req.session.mgr_id);
+    }
+    else if(req.session.ceo){
+        res.send('CEO');
     }
     else{
         res.send("AuthFail");

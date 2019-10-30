@@ -34,18 +34,18 @@ export default class OtherPage extends  Component {
 
     componentDidMount() {
         axios.get('http://localhost:4000/policy/', {withCredentials: true})
-            .then(response => {
-                this.setState({ policies: response.data });
-            })
-            .catch(function (error){
-                console.log(error);
-            }   )
+        .then(response => {
+            this.setState({ policies: response.data });
+        })
+        .catch(function (error){
+            console.log(error);
+        }   )
     }
 
     policyList() {
         return this.state.policies.map(function(currentPolicy, i){
             return (<Policy policy={currentPolicy} key={i} />);
-            })
+        })
     }
 
     render(){
@@ -67,6 +67,7 @@ export default class OtherPage extends  Component {
                     </tbody>
                 </table>
             </div>
+            
         );
     }
 }
