@@ -50,22 +50,27 @@ export default class customerSignUp extends  Component {
     onSubmit(e){
         e.preventDefault();
 
-        axios.post('http://localhost:4000/investigator/create', {
-            email: this.state.email,
-            password: this.state.password,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname}, {withCredentials: true}).then(response => {
-            console.log('login response', response.data);
-            if(response.data.errno){
-                alert('Email already Exists!');
-            }
-            else{
-                //Show toast
-                this.props.history.push("/manager/dashboard");
-            }
-        }).catch(function(err) {
-            console.log(err);
-        });
+        if(!this.state.firstname || !this.state.lastname){
+            alert('Please Enter Names');
+        }
+        else{
+            axios.post('http://localhost:4000/investigator/create', {
+                email: this.state.email,
+                password: this.state.password,
+                firstname: this.state.firstname,
+                lastname: this.state.lastname}, {withCredentials: true}).then(response => {
+                console.log('login response', response.data);
+                if(response.data.errno){
+                    alert('Email already Exists!');
+                }
+                else{
+                    //Show toast
+                    this.props.history.push("/manager/dashboard");
+                }
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
     }
 
     render(){

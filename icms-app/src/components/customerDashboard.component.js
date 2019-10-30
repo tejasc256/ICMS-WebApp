@@ -31,15 +31,17 @@ export default class customerDashboard extends  Component {
     }
 
     numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if(x){
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
     }
 
     fetchData(){
         axios.get('http://localhost:4000/customer/profile', {withCredentials: true})
         .then(response => {
-            // if(response.data === 'AuthFail'){
-            //     this.props.history.push("/");
-            // }
+            if(response.data === 'AuthFail'){
+                return false;
+            }
             var bal = this.numberWithCommas(response.data[0].balance);
             this.setState({
                 firstname: response.data[0].firstname,
@@ -60,6 +62,7 @@ export default class customerDashboard extends  Component {
         .catch(function(err) {
             console.log(err);
         });
+        return true;
     }
 
     getBranch(){
@@ -71,8 +74,12 @@ export default class customerDashboard extends  Component {
     }
 
     componentDidMount(){
-        this.fetchData();
-        this.timer = setInterval(() => this.fetchData(), 250);
+        if(this.fetchData()){
+            this.timer = setInterval(() => this.fetchData(), 250);
+        }
+        else{
+            this.props.history.push("/");
+        }
     }
 
     userSignOut(){

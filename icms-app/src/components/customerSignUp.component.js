@@ -45,6 +45,11 @@ export default class customerSignUp extends  Component {
                 message: 'Passwords dont match'
             });
         }
+        else if(!this.state.cust_email){
+            this.setState({
+                message: 'Please input email'
+            });
+        }
         else{
             axios.post('http://localhost:4000/customer/signup', {email: this.state.cust_email, password: this.state.cust_password}, {withCredentials: true}).then(response => {
                 console.log('login response', response.data);
@@ -60,8 +65,11 @@ export default class customerSignUp extends  Component {
         }
     }
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={myStyle}>
                <h3>Sign Up</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">

@@ -109,15 +109,7 @@ router.post('/ceo', function(req, res) {
 
 router.get('/testpage', auth, function(req, res) {
     if(req.session.customer){
-        sql.query("select firstname from customer where cid = ?", req.session.cid, function(err ,result) {
-            if(err){
-                throw err;
-                console.log(err);
-            }
-            else{
-                res.send('Customer ' + result[0].firstname + ' !');
-            }
-        });
+        res.send('Customer');
     }
     else if(req.session.agent){
         res.send('Agent ' + req.session.agent_id);

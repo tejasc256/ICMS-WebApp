@@ -53,7 +53,7 @@ export default class agentLogin extends  Component {
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
                        <label>Email: </label>
-                       <input  type="text"
+                       <input  type="email"
                                className="form-control"
                                value={this.state.email}
                                onChange={this.onChangeCustEmail}

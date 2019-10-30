@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Button, CardDeck, Card} from 'react-bootstrap';
+import { Button, CardDeck, Card, Jumbotron} from 'react-bootstrap';
 import ViewPolicy from "./viewPolicy.component";
 
 class Policy extends Component {
@@ -11,7 +11,7 @@ class Policy extends Component {
 
     render(){
         return(
-            <Card className="border-primary mx-auto" style={{marginBottom: "3%", width: "60%"}}>
+            <Card className="shadow p-3 mx-auto" style={{marginBottom: "3%", width: "60%"}}>
             <Card.Body>
             <Card.Title as="h5"><b>{this.props.policy.name}</b></Card.Title>
             <Card.Title as= "h6">Description</Card.Title>
@@ -60,8 +60,33 @@ export default class OtherPage extends  Component {
 
     render(){
         return (
-            <div style={{marginTop: "5%", marginLeft: "5%", marginRight: "5%"}}>
-                {this.policyList()}
+            <div>
+                <Jumbotron style={{background: "url('/images/car.jpeg')", backgroundSize: "cover", alignItems: "center", margin: "0%"}} fluid>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                </Jumbotron>
+                <Jumbotron fluid>
+                    {this.policyList()}
+                </Jumbotron>
             </div>
         );
     }
