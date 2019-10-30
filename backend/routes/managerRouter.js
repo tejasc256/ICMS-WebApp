@@ -57,6 +57,17 @@ router.post('/create/agent', auth, function(req, res) {
     });
 })
 
+// Code for procedure for manager create
+
+// delimiter //
+// create procedure CreateManager(in mem varchar(255),in mps varchar(255),in mfn varchar(255),in mln varchar(255),in mbr varchar(255))
+// begin
+// declare var int 
+// insert into manager_login(email,password) values (mem,mps);
+// select mgr_id into var from manager_login where email=mem;
+// insert into manager values (var,mfn,mln,mbr);
+// end //
+
 router.post('/create', auth, function(req, res) {
     sql.query('call CreateManager(?,?,?,?,?,?,?)', [req.body.email, req.body.password, req.body.firstname, req.body.lastname,req.body.branch], function(err , result) {
         if(err){
