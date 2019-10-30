@@ -30,6 +30,7 @@ var claimRouter = require('./routes/claimRouter');
 var managerRouter = require('./routes/managerRouter');
 var ceoRouter = require('./routes/ceoRouter');
 var investigateRouter = require('./routes/investigateRouter');
+var branchRouter = require('./routes/branchRouter');
 
 app.use('/customer', customerRouter);
 app.use('/agent', agentRouter);
@@ -39,9 +40,9 @@ app.use('/attribute', attributesRouter);
 app.use('/login', loginRouter);
 app.use('/claim', claimRouter);
 app.use('/manager',managerRouter);
-app.use('/claims',claimRouter); 
 app.use('/ceo',ceoRouter);
-app.use('/investigate',investigateRouter);
+app.use('/investigator',investigateRouter);
+app.use('/branch', branchRouter);
 
 // This line should be AFTER all routes
 app.get('*', function(req, res) {

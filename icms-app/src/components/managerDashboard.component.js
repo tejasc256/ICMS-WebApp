@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
+import Popup from 'reactjs-popup';
 
-import ViewAgents from "./viewAgents.component";
-//import CustomerClaims from "./customerClaims.component";
+import ViewAgents from './viewAgents.component';
+import ViewInvestigators from './viewInvestigators.component';
 
 export default class managerDashboard extends  Component {
     constructor(props){
@@ -13,8 +14,7 @@ export default class managerDashboard extends  Component {
         this.state = {
             firstname: '',
             lastname: '',
-            branch: '',
-            //balance: ''
+            branch: ''
         }
 
         this.userSignOut = this.userSignOut.bind(this);
@@ -23,11 +23,13 @@ export default class managerDashboard extends  Component {
     componentDidMount(){
         axios.get('http://localhost:4000/manager/profile', {withCredentials: true})
         .then(response => {
+            if(response.data === 'AuthFail'){
+                this.props.history.push("/");
+            }
             this.setState({
                 firstname: response.data[0].firstname,
                 lastname: response.data[0].lastname,
-                branch: response.data[0].branch,
-                //balance: response.data[0].balance
+                branch: response.data[0].branch
             });
         }).catch(function(err){
             console.log(err + 'bulla');
@@ -48,25 +50,30 @@ export default class managerDashboard extends  Component {
         return (
             <Router>
                 <div style={{marginTop: 10}}>
-                   <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
-                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button>
+                    <h3>
+                        Manager Dashboard
+                    </h3>
+                   <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
+                   {this.state.branch} <br/>
+                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
+                       <Button variant="primary" href="/create/agent">Create Agent</Button><br/>
+                       <Button variant="primary" href="/create/investigator">Create Investigator</Button>
                </div>
                <div className="container">
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
                        <ul className="navbar-nav mr-auto">
                            <li className="navbar-item">
-                           <Link to="/viewagents" className="nav-link">Agents</Link>
+                           <Link to="/agents" className="nav-link">View Agents</Link>
                            </li>
-                           {/* <li className="navbar-item">
-                           <Link to="/myclaims" className="nav-link">My Claims</Link>
-                           </li> */}
+                           <li className="navbar-item">
+                           <Link to="/investigators" className="nav-link">View Investigators</Link>
+                           </li>
                        </ul>
                    </nav>
                </div>
-               <Route path = "/myagents" component = {ViewAgents} />
-               {/* <Route path = "/myclaims" component = {CustomerClaims} /> */}
+               <Route path = "/agents" component = {ViewAgents} />
+               <Route path = "/investigators" component = {ViewInvestigators} />
             </Router>
-
         );
     }
 }

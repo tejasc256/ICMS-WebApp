@@ -19,15 +19,16 @@ exports.create_a_customer = function(req, res) {
   var new_customer = new Customer(req.body);
 
   console.log(new_customer);
+  console.log(req.session.cid);
   //handles null error
-   if(!new_customer.cid || !new_customer.firstname || !new_customer.lastname ||!new_customer.branch || !new_customer.dob ){
+   if(!new_customer.firstname || !new_customer.lastname ||!new_customer.branch || !new_customer.dob ){
 
             res.status(400).send({ error:true, message: 'Please provide all information' });
 
         }
 else{
 
-  Customer.createCustomer(new_customer, function(err, customer) {
+  Customer.createCustomer(new_customer, req.session.cid, function(err, customer) {
 
     if (err)
       res.send(err);
@@ -81,7 +82,7 @@ exports.view_customer_policies = function(req, res) {
 };
 
 exports.view_customer_claims = function(req, res) {
-    sql.query("select c.claim_id, p.name as pname, c.amount, a.name as aname from claims c inner join policy p on c.pid = p.pid inner join policy_attributes a on a.aid = c.aid where c.cid = ?;", req.session.cid, function(err, result) {
+    sql.query("select c.claim_id, p.name as pname, c.amount, a.name as aname, i.granted as status from claims c inner join policy p on c.pid = p.pid inner join policy_attributes a on a.aid = c.aid left join investigates i on c.claim_id = i.claim_id where c.cid = ?;", req.session.cid, function(err, result) {
         if(err){
             res.send(err);
             throw err;
@@ -100,6 +101,33 @@ exports.view_customer_profile = function(req, res) {
             throw err;
         }
         else{
+            res.send(result);
+        }
+    });
+};
+
+exports.create_customer_email = function(req, res) {
+    sql.query("insert into customer_login(email, password) values (?, ?);", [req.body.email, req.body.password], function(err, result) {
+        if(err){
+            console.log(err);
+            res.send(err);
+        }
+        else{
+            console.log(result.insertId);
+            req.session.cid = result.insertId;
+            req.session.customer = true;
+            res.send(result);
+        }
+    });
+};
+
+exports.edit_customer_profile = function(req, res) {
+    sql.query("update customer set firstname = ?, lastname = ?, branch = ? where cid = ?", [req.body.firstname, req.body.lastname, req.body.branch, req.session.cid], function(err, result) {
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log('Profile Updated');
             res.send(result);
         }
     });
