@@ -46,13 +46,16 @@ export default class managerLogin extends  Component {
         });
     }
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={myStyle}>
                <h3>CEO Login</h3>
                <form onSubmit={this.onSubmit}>
                    <div className="form-group">
                        <label>Email: </label>
-                       <input  type="text"
+                       <input  type="email"
                                className="form-control"
                                value={this.state.email}
                                onChange={this.onChangeCustEmail}

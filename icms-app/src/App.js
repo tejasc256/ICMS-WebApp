@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import axios from 'axios';
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
@@ -43,6 +44,44 @@ import AutoPolicies from './components/viewPoliciesAuto.component';
 import CyberPolicies from './components/viewPoliciesCyber.component';
 
 class App extends Component {
+    constructor(props){
+        super(props);
+
+        this.state ={
+            showDash: false
+        }
+        this.checkButton = this.checkButton.bind(this);
+    }
+
+    checkButton(){
+        axios.get('http://localhost:4000/login/testpage', {withCredentials: true})
+        .then(response => {
+            if(response.data === 'Customer'){
+                this.setState({
+                    showDash: true
+                });
+            }
+            else if(response.data === 'AuthFail'){
+                this.setState({
+                    showDash: false
+                })
+            }
+            else{
+                this.setState({
+                    showDash: false
+                })
+            }
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
+    }
+
+    componentDidMount(){
+        this.checkButton();
+        this.timer = setInterval(() => this.checkButton(), 250);
+    }
+
     render(){
 
         return (
@@ -69,9 +108,6 @@ class App extends Component {
                                 <Link to="/policies/cyber" className="nav-link">Cyber Insurance</Link>
                             </li>
                             <li className="navbar-item">
-                                <Link to="/other" className="nav-link">List Customers</Link>
-                            </li>
-                            <li className="navbar-item">
                                 <Link to="/policies/all" className="nav-link">View Policies</Link>
                             </li>
                             <li className="navbar-item">
@@ -89,6 +125,9 @@ class App extends Component {
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li className="navbar-item">
+                                {this.state.showDash && <Link to="/dashboard" className="nav-link">Go To Dashboard</Link>}
+                            </li>
+                            <li className="navbar-item">
                                 <Link to="/login" className="nav-link">Customer Login</Link>
                             </li>
                             <li className="navbar-item">
@@ -101,21 +140,23 @@ class App extends Component {
                     <Route path = "/" exact component = {HomePage}/>
                     <Route path = "/other" component = {OtherPage}/>
                     <Route path = "/login" component = {CustomerLogin}/>
+                    <Route path = "/agent/login" component = {AgentLogin}/>
+                    <Route path = "/manager/login" component = {ManagerLogin}/>
+                    <Route path = "/investigator/login" component = {InvestigatorLogin}/>
                     <Route path = "/policies/home" component = {HomePolicies}/>
                     <Route path = "/policies/life" component = {LifePolicies}/>
                     <Route path = "/policies/health" component = {HealthPolicies}/>
+                    <Route path = "/policies/auto" component = {AutoPolicies}/>
+                    <Route path = "/policies/cyber" component = {CyberPolicies}/>
                     <Route path = "/policies/all" component = {ViewPoliciesFancy}/>
                     <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
                     <Route path = "/dashboard" component = {CustomerDashboard}/>
-                    <Route path = "/claims" component = {ViewClaims}/>
                     <Route path = "/ceo/managers" component = {ViewManagers}/>
+                    <Route path = "investigator/claims" component = {ViewClaims}/>
                     <Route path = "/signup" component = {CustomerSignUp}/>
                     <Route path = "/editprofile" component = {EditProfile}/>
                     <Route path = "/agent/dashboard" component = {AgentDashboard}/>
-                    <Route path = "/agent/login" component = {AgentLogin}/>
-                    <Route path = "/investigator/login" component = {InvestigatorLogin}/>
                     <Route path = "/investigator/dashboard" component = {InvestigatorDashboard}/>
-                    <Route path = "/manager/login" component = {ManagerLogin}/>
                     <Route path = "/manager/dashboard" component = {ManagerDashboard}/>
                     <Route path = "/viewagent/:agent_id" component = {ViewAgent}/>
                     <Route path = "/create/agent" component = {CreateAgent} />

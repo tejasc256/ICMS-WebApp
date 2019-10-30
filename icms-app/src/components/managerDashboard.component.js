@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, ButtonGroup } from 'react-bootstrap';
 import Popup from 'reactjs-popup';
 
 import ViewAgents from './viewAgents.component';
@@ -14,10 +14,12 @@ export default class managerDashboard extends  Component {
         this.state = {
             firstname: '',
             lastname: '',
-            branch: ''
+            branch: '',
+            branches: []
         }
 
         this.userSignOut = this.userSignOut.bind(this);
+        this.getBranch = this.getBranch.bind(this);
     }
 
     componentDidMount(){
@@ -34,7 +36,26 @@ export default class managerDashboard extends  Component {
         }).catch(function(err){
             console.log(err + 'bulla');
         });
+
+        axios.get('http://localhost:4000/branch')
+        .then(response => {
+            this.setState({
+                branches: response.data
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
     }
+
+    getBranch(){
+        for(var i=0; i<this.state.branches.length; i++){
+            if(this.state.branches[i].branch_id === this.state.branch){
+                return (this.state.branches[i].city + ', ' + this.state.branches[i].country);
+            }
+        }
+    }
+
 
     userSignOut(){
         axios.get('http://localhost:4000/login/logout', {withCredentials: true})
@@ -47,19 +68,24 @@ export default class managerDashboard extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
             <Router>
-                <div style={{marginTop: 10}}>
+                <div style={MyStyle}>
                     <h3>
                         Manager Dashboard
                     </h3>
                    <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
-                   {this.state.branch} <br/>
-                       <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
+                   Branch: {this.getBranch()} <br/><br/>
+               <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/><br/>
+                        <ButtonGroup>
                        <Button variant="primary" href="/create/agent">Create Agent</Button><br/>
                        <Button variant="primary" href="/create/investigator">Create Investigator</Button>
+                       </ButtonGroup>
                </div>
-               <div className="container">
+               <div style={MyStyle}>
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
                        <ul className="navbar-nav mr-auto">
                            <li className="navbar-item">

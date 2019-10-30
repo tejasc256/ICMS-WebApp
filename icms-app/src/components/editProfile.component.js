@@ -21,6 +21,7 @@ export default class editProfile extends  Component {
         this.populateBranches = this.populateBranches.bind(this);
         this.onChangeBranch = this.onChangeBranch.bind(this);
         this.onChangeDOB = this.onChangeDOB.bind(this);
+        this.checkAge = this.checkAge.bind(this);
     }
 
     componentDidMount(){
@@ -67,19 +68,42 @@ export default class editProfile extends  Component {
         });
     }
 
+    checkAge(){
+        var oneyear = 1000*60*60*24*30*12;
+        var present = new Date();
+        var entered = new Date(this.state.dob);
+        var difference = (present.getTime() - entered.getTime())/oneyear;
+        return difference;
+    }
+
 
     onSubmit(e){
         e.preventDefault();
-        axios.post('http://localhost:4000/customer', {firstname: this.state.firstname, lastname: this.state.lastname, dob: this.state.dob, branch: this.state.branch}, {withCredentials: true}).then(response => {
-            this.props.history.push("/dashboard");
-        }).catch(function(err) {
-            console.log(err);
-        });
+        if(!this.state.branch){
+            alert('Please Choose Branch');
+        }
+        else if(this.checkAge() < 18){
+            alert('You have to be atleast 18 years of age');
+        }
+        else if(!this.state.firstname || !this.state.lastname){
+            alert('Enter Names');
+        }
+        else{
+            axios.post('http://localhost:4000/customer', {firstname: this.state.firstname, lastname: this.state.lastname, dob: this.state.dob, branch: this.state.branch}, {withCredentials: true}).then(response => {
+                this.props.history.push("/dashboard");
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
+
     }
 
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div>
+            <div style={myStyle}>
                 <h3>Profile Details</h3>
                     <Form>
                         <Form.Group controlId="formBasicEmail">

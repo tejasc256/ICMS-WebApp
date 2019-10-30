@@ -37,7 +37,7 @@ export default class investigatorDashboard extends  Component {
     userSignOut(){
         axios.get('http://localhost:4000/login/logout', {withCredentials: true})
         .then(response => {
-            this.props.history.push("/login");
+            this.props.history.push("/");
         })
         .catch(function(err) {
             console.log(err);
@@ -45,25 +45,21 @@ export default class investigatorDashboard extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
             <Router>
-                <div style={{marginTop: 10}}>
+                <div style={MyStyle}>
                     <h3>
-                        Investigator Dashboard
-                    </h3>
-                   <h5>Welcome {this.state.firstname} {this.state.lastname}</h5>
+                        CCICC Investigator Dashboard
+                    </h3><br/>
+                <h5>Welcome {this.state.firstname} {this.state.lastname}</h5><br/>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button><br/>
                </div>
-               <div className="container">
-                   <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                       <ul className="navbar-nav mr-auto">
-                           <li className="navbar-item">
-                           <Link to="/claims" className="nav-link">Pending Claims</Link>
-                           </li>
-                       </ul>
-                   </nav>
+               <div>
+                   <PendingClaims />
                </div>
-               <Route path = "/claims" component = {PendingClaims} />
             </Router>
         );
     }
