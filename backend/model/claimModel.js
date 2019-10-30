@@ -36,7 +36,7 @@ Claim.getClaimById = function (claimId, result) {
             });
 };
 Claim.getAllClaims = function (result) {
-        sql.query("Select * from claims where claim_id not in (select claim_id from investigates)", function (err, res) {
+        sql.query("select claim_id, cid, p.name as pname, a.name as aname, c.amount from claims c inner join policy p on c.pid = p.pid inner join policy_attributes a on a.aid = c.aid where claim_id not in (select claim_id from investigates);", function (err, res) {
 
                 if(err) {
                     console.log("error: ", err);

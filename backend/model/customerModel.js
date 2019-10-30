@@ -11,8 +11,8 @@ var Customer = function(customer){
     this.balance = 0;
 };
 
-Customer.createCustomer = function (newCustomer, result) {
-        sql.query("INSERT INTO customer(cid, firstname, lastname, dob, branch) values (?,?,?,?,?)", [newCustomer.cid, newCustomer.firstname, newCustomer.lastname,
+Customer.createCustomer = function (newCustomer, cid,  result) {
+        sql.query("INSERT INTO customer(cid, firstname, lastname, dob, branch) values (?,?,?,?,?)", [cid, newCustomer.firstname, newCustomer.lastname,
                                                                                                         newCustomer.dob, newCustomer.branch], function (err, res) {
 
                 if(err) {
