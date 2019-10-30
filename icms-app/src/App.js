@@ -19,6 +19,8 @@ import ClaimsInvestigatorChart from "./components/claimsperinvestigator.componen
 import AgentManagerChart from "./components/agentspermanagerchart.component";
 import ClaimsBranchChart from "./components/claimsperbranchchart.component";
 import claimsCustomerChart from "./components/claimspercustomerchart.component";
+import ManagerDashboard from "./components/managerDashboard.component";
+import CeoDashboard from "./components/ceoDashboard.component";
 
 class App extends Component {
     render(){
@@ -53,7 +55,7 @@ class App extends Component {
                 <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
                 <Route path = "/dashboard" component = {CustomerDashboard}/>
                 <Route path = "/claims" component = {ViewClaims}/>
-                <Route path = "/ceo" component = {ViewManagers}/>
+                <Route path = "/ceo" component = {CeoDashboard}/>
                 <Route path = "/manager" component = {ViewAgents}/>
                 <Route path = "/ceo/policychart" component = {PolicyChart}/>
                 <Route path = "/ceo/customerbranchcountchart" component = {Customerbranchchart}/>
@@ -63,6 +65,8 @@ class App extends Component {
                 <Route path = "/ceo/agentspermanagerchart" component = {AgentManagerChart}/>
                 <Route path = "/ceo/claimsperbranchchart" component = {ClaimsBranchChart}/>
                 <Route path = "/ceo/claimspercustomerchart" component = {claimsCustomerChart}/>
+                <Route path = "/manager/profile" component = {ManagerDashboard}/>
+                <Route path = "/ceo/profile" component = {CeoDashboard}/>
 
                     </div>
 

@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap';
 import ViewAgents from "./viewAgents.component";
 //import CustomerClaims from "./customerClaims.component";
 
-export default class customerDashboard extends  Component {
+export default class managerDashboard extends  Component {
     constructor(props){
         super(props);
 
@@ -55,7 +55,7 @@ export default class customerDashboard extends  Component {
                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
                        <ul className="navbar-nav mr-auto">
                            <li className="navbar-item">
-                           <Link to="/mypolicies" className="nav-link">Agents</Link>
+                           <Link to="/viewagents" className="nav-link">Agents</Link>
                            </li>
                            {/* <li className="navbar-item">
                            <Link to="/myclaims" className="nav-link">My Claims</Link>
@@ -63,7 +63,7 @@ export default class customerDashboard extends  Component {
                        </ul>
                    </nav>
                </div>
-               <Route path = "/mypolicies" component = {ViewAgents} />
+               <Route path = "/myagents" component = {ViewAgents} />
                {/* <Route path = "/myclaims" component = {CustomerClaims} /> */}
             </Router>
 

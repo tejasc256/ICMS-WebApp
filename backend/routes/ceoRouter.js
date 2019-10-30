@@ -112,7 +112,11 @@ router.get('/claimsperinvestigatorchart', function(req, res) {
     });
 });
 
-router.get('/', function(req, res) {
+router.get('/profile', function(req ,res){
+    
+});
+
+router.get('/managers', function(req, res) {
     sql.query("select * from manager", function(err , result) {
         if(err){
             console.log(err);
