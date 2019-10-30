@@ -38,6 +38,7 @@ import ViewPoliciesFancy from './components/viewPoliciesFancy.component';
 import HomePolicies from './components/viewPoliciesHome.component';
 import LifePolicies from './components/viewPoliciesLife.component';
 import HealthPolicies from './components/viewPoliciesHealth.component';
+import CreateManager from "./components/createManager.component";
 import AutoPolicies from './components/viewPoliciesAuto.component';
 import CyberPolicies from './components/viewPoliciesCyber.component';
 
@@ -107,7 +108,7 @@ class App extends Component {
                     <Route path = "/viewpol/:pid" component = {ViewPolicy}/>
                     <Route path = "/dashboard" component = {CustomerDashboard}/>
                     <Route path = "/claims" component = {ViewClaims}/>
-                    <Route path = "/ceo/dashboard" component = {ViewManagers}/>
+                    <Route path = "/ceo/managers" component = {ViewManagers}/>
                     <Route path = "/signup" component = {CustomerSignUp}/>
                     <Route path = "/editprofile" component = {EditProfile}/>
                     <Route path = "/agent/dashboard" component = {AgentDashboard}/>
@@ -130,6 +131,7 @@ class App extends Component {
                 <Route path = "/ceo/claimsperbranchchart" component = {ClaimsBranchChart}/>
                 <Route path = "/ceo/claimspercustomerchart" component = {claimsCustomerChart}/>
                 <Route path = "/ceo/profile" component = {CeoDashboard}/>
+                <Route path = "/manager/create" component = {CreateManager}/>
                 </Router>
             );
         }

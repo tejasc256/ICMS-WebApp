@@ -131,6 +131,7 @@ export default class customerDashboard extends  Component {
                                </ul>
                            </div>
                        </div>
+                       
                    </nav>
                </div>
                <Route path = "/mypolicies" component = {CustomerPolicies} />

@@ -39,6 +39,17 @@ router.get('/requestsperagentchart', function(req, res) {
     });
 });
 
+router.get('/requestsperpolicychart', function(req, res) {
+    sql.query("select pid,count(*) from requests group by pid", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
 // router.get('/invchart', function(req, res) {
 //     sql.query("select inv_id,count(*) from investigates group by inv_id", function(err , result) {
 //         if(err){
@@ -114,6 +125,34 @@ router.get('/claimsperinvestigatorchart', function(req, res) {
 
 router.get('/profile', function(req ,res){
     
+});
+
+router.get('/reports', function(req, res) {
+    
+});
+
+router.get('/agents', function(req, res) {
+    sql.query("select * from agent", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
+});
+
+router.get('/investigators', function(req, res) {
+    sql.query("select * from investigator", function(err , result) {
+        if(err){
+            console.log(err);
+            throw err;
+        }
+        else{
+            res.send(result);
+        }
+    });
 });
 
 router.get('/managers', function(req, res) {

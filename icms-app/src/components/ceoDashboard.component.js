@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { Button } from 'react-bootstrap';
+import {Navbar, Nav, NavItem, Button ,Glyphicon, Jumbotron,Row,Col,Container} from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import {CardDeck} from 'react-bootstrap';
 import ViewManagers from "./viewManagers.component";
@@ -13,6 +13,8 @@ import ClaimsBranchchart from "./claimsperbranchchart.component";
 import AgentsManagerchart from "./agentspermanagerchart.component";
 import ClaimsCustomerchart from "./claimspercustomerchart.component";
 import ClaimsInvestigatorchart from "./claimsperinvestigator.component";
+import Managers from "./viewManagers.component"
+import Reports from "./ceoReports.component";
 import barchart from "../images/barchart.png";
 import linechart from "../images/linechart.png";
 import donutchart from "../images/donutchart.png";
@@ -65,14 +67,44 @@ export default class ceoDashboard extends  Component {
         return (
             <Router>
                 <div style={{marginTop: 10}}>
-                   <h3>Welcome {this.state.firstname} {this.state.lastname}</h3>
+                <Jumbotron style={{background: "url('/images/desk2.jpg')", backgroundSize: "cover", alignItems: "center", margin:"0%"}} fluid>
+                        <br/>
+                        <br/>
+                            <Container>
+                                <Row>
+                                    <Col md={10}>
+                                        <h3>Welcome Priyam Chaddah</h3>
+                                            
+                                    </Col>
+                                    
+                                </Row>
+                            </Container>
+                    </Jumbotron>
+                   {/* <h3>Welcome {this.state.firstname} {this.state.lastname}</h3> */}
+                      
+               </div>
+               <div>
+                   <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                       <div class="mr-auto">
+                           <div className="collapse navbar-collapse">
+                               <ul className="navbar-nav mr-auto">
+                                   <li className="navbar-item">
+                                   <Link to="/ceo/reports" className="nav-link">Reports </Link>
+                                   </li>
+                                   <li className="navbar-item">
+                                   <Link to="/ceo/managers" className="nav-link">Managers</Link>
+                                   </li>
+                               </ul>
+                               
+                           </div>
+                       </div>
                        <Button variant="secondary" onClick={this.userSignOut}>Sign Out</Button>
+                   </nav>
                </div>
                <div className="container">
                     <br/>
-                    <CardDeck>
+                    {/* <CardDeck>
                         <Card style={{ width: '18rem' }}>
-                            {/* <Card.Img variant="top" src={donutchart} /> */}
                             <Card.Body>
                                 <Card.Title>Policies by Type</Card.Title>
                                 
@@ -99,9 +131,9 @@ export default class ceoDashboard extends  Component {
                                 </Link>
                             </Card.Body>
                         </Card>
-                    </CardDeck>
+                    </CardDeck> */}
                     <br/>
-                    <CardDeck>
+                    {/* <CardDeck>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Policy</Card.Title>
@@ -129,9 +161,9 @@ export default class ceoDashboard extends  Component {
                                 </Link>
                             </Card.Body>
                         </Card>
-                    </CardDeck>
+                    </CardDeck> */}
                     <br/>
-                    <CardDeck>
+                    {/* <CardDeck>
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Customer</Card.Title>
@@ -150,7 +182,7 @@ export default class ceoDashboard extends  Component {
                                 </Link>
                             </Card.Body>
                         </Card>
-                    </CardDeck>
+                    </CardDeck> */}
                            {/* <li className="navbar-item">
                            <Link to="/managers" className="nav-link">Managers</Link>
                            </li> */}
@@ -172,6 +204,11 @@ export default class ceoDashboard extends  Component {
                <Route path = "/ceo/claimsperbranchchart" component = {ClaimsBranchchart} />
                <Route path = "/ceo/claimspercustomerchart" component = {ClaimsCustomerchart} />
                <Route path = "/ceo/claimsperinvestigatorchart" component = {ClaimsInvestigatorchart} />
+               <Route path = "/ceo/managers" component = {Managers} />
+               <Route path = "/ceo/reports" component = {Reports} />
+               
+               
+
             </Router>
 
         );

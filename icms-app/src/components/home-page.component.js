@@ -31,13 +31,13 @@ export default class HomePage extends  Component {
                     <h2>Why chose CCICC</h2>
                     <br/>
                     <h5>
-                        CCICC envisions to be the most admired life insurance company in India by securing the financial future of our customers.
+                        CCICC is the smart choice to secure yourself and your future.
                         <br/><br/>
-                        We are an honest life insurance company, committed to doing what is right.
+                        We provide the highest claim settlement ratio in India and believe in a quick settlement mentality to deliver results to our customers as soon as possible.
                         <br/>  <br/>
-                        We serve our customers through Long-Term Savings, Protection and Retirement Solutions, delivered by our high-quality Agency and Multi-Channel Distribution Partners
+                        In 2018, CCICC was awarded the best insurance and claims company at the Indian Insurance Summit.
                         <br/><br/>
-                        We are a business with strong social relevance and contribute to society by supporting causes in health and well-being.
+                        
                     </h5>
                     <br/><br/>
                     <p>
