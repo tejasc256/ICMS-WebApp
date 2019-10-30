@@ -6,7 +6,7 @@ import axios from 'axios';
 class ChartsPage extends React.Component {
   state = {
     dataBar: {
-      labels: ["Life", "Auto", "Cyber", "Travel", "Home"],
+      labels: ["Life", "Auto", "Cyber", "Health", "Home"],
       datasets: [
         {
           label: "Number of Policies",

@@ -1,21 +1,50 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const Manager = props => (
-    <tr>
-        <td>{props.manager.mgr_id}</td>
-        <td>{props.manager.firstname}</td>
-        <td>{props.manager.lastname}</td>
-        <td>{props.manager.branch}</td>
-    </tr>
-)
+class Manager extends Component {
+    constructor(props){
+        super(props);
+
+        this.deleteManager = this.deleteManager.bind(this);
+    }
+
+    deleteManager(){
+        axios.delete('http://localhost:4000/manager/'+this.props.manager.mgr_id, {withCredentials: true})
+        .then(response => {
+            console.log(response);
+            //Display Toast
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    render(){
+        return(
+            <tr>
+                <td>{this.props.manager.mgr_id}</td>
+                <td>{this.props.manager.firstname}</td>
+                <td>{this.props.manager.lastname}</td>
+                <td>{this.props.manager.branch}</td>
+                <td>
+                    <Button variant="danger" onClick={this.deleteManager}>Delete Manager</Button>
+                </td>
+            </tr>
+        );
+    }
+}
+
 export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {managers: []};
+        
     }
+
+    
 
     componentDidMount() {
         axios.get('http://localhost:4000/ceo/managers')
@@ -37,6 +66,7 @@ export default class OtherPage extends  Component {
         return (
             <div>
                 <h3>Managers List</h3>
+                <Button variant="primary" href="/manager/create">Create Manager</Button><br/>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
                     <thead>
                         <tr>
@@ -44,6 +74,7 @@ export default class OtherPage extends  Component {
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Branch</th>
+                            <th>Remove Manager</th>
                         </tr>
                     </thead>
                     <tbody>
