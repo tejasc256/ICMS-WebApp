@@ -21,7 +21,6 @@ import ClaimsInvestigatorChart from "./components/claimsperinvestigator.componen
 import AgentManagerChart from "./components/agentspermanagerchart.component";
 import ClaimsBranchChart from "./components/claimsperbranchchart.component";
 import claimsCustomerChart from "./components/claimspercustomerchart.component";
-import ManagerDashboard from "./components/managerDashboard.component";
 import CeoDashboard from "./components/ceoDashboard.component";
 import CustomerSignUp from "./components/customerSignUp.component";
 import EditProfile from "./components/editProfile.component";
@@ -121,7 +120,7 @@ class App extends Component {
                     <Route path = "/create/agent" component = {CreateAgent} />
                     <Route path = "/create/investigator" component = {CreateInvestigator} />
                     <Route path = "/ceo/login" component = {CeoLogin} />
-                     <Route path = "/ceo" component = {CeoDashboard}/>
+                     <Route path = "/ceo/dashboard" component = {CeoDashboard}/>
                 <Route path = "/ceo/policychart" component = {PolicyChart}/>
                 <Route path = "/ceo/customerbranchcountchart" component = {Customerbranchchart}/>
                 <Route path = "/ceo/requestsperagent" component = {RequestperagentChart}/>

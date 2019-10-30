@@ -18,7 +18,7 @@ export default class OtherPage extends  Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/ceo')
+        axios.get('http://localhost:4000/ceo/managers')
             .then(response => {
                 this.setState({ managers: response.data });
             })
