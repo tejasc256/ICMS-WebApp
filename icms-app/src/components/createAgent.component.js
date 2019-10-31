@@ -102,7 +102,7 @@ export default class customerSignUp extends  Component {
         }
         else if(this.state.commission > 100 || this.state.commission <= 0){
             this.setState({
-                message: 'Commission has to be positive'
+                message: 'Commission error Range (1 - 100)'
             });
         }
         else if(!this.state.firstname || !this.state.lastname){
@@ -113,6 +113,11 @@ export default class customerSignUp extends  Component {
         else if(!this.state.branch){
             this.setState({
                 message: 'Please Choose Branch'
+            });
+        }
+        else if(!this.state.cust_email){
+            this.setState({
+                message: 'Please Enter Email'
             });
         }
         else{

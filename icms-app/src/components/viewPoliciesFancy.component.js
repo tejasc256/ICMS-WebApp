@@ -58,8 +58,7 @@ export default class OtherPage extends  Component {
                                     <Card.Body>
                                         <Card.Title>Life Insurance</Card.Title>
                                             <Card.Text>
-                                                    This is a wider card with supporting text below as a natural lead-in to
-                                                    additional content. This content is a little bit longer.
+            In case of an untimely death of the insured individual, the total benefit is paid to the nominee which can be claimed as a lumpsum or over a duration of time.
                                             </Card.Text>
                                         <div className={cardStyle.reveal} style={{textAlign: "center"}}>
                                                 <Button href="/policies/life">Learn More</Button>
@@ -71,11 +70,11 @@ export default class OtherPage extends  Component {
                             <Card.Body>
                                 <Card.Title>Home Insurance</Card.Title>
                                         <Card.Text>
-                                            This is a wider card with supporting text below as a natural lead-in to
-                                            additional content. This content is a little bit longer.
+                        In case of natural or man made calamities affecting the home of the insured individual, coverage will be provided.
                                         </Card.Text>
+                        <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/home">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -84,11 +83,12 @@ export default class OtherPage extends  Component {
                             <Card.Body>
                                 <Card.Title>Health Insurance</Card.Title>
                                         <Card.Text>
-                                            This is a wider card with supporting text below as a natural lead-in to
-                                            additional content. This content is a little bit longer.
+            In case of medical emergencies, coverage will be provided for the cost of treatment.
                                         </Card.Text>
+            <br/>
+            <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/health">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -97,11 +97,11 @@ export default class OtherPage extends  Component {
                             <Card.Body>
                                 <Card.Title>Auto Insurance</Card.Title>
                                     <Card.Text>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This content is a little bit longer.
-                                    </Card.Text>
+            In case of financial loss, theft or accident of the automobile, the insurance will cover the damage inficted.
+                                        </Card.Text>
+            <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/auto">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -110,11 +110,10 @@ export default class OtherPage extends  Component {
                             <Card.Body>
                                 <Card.Title>Cyber Insurance</Card.Title>
                                     <Card.Text>
-                                        This is a wider card with supporting text below as a natural lead-in to
-                                        additional content. This content is a little bit longer.
+            In case of a cyber crime such as malware, DoS or ransomeware against the insured individual or their organisation, the damage shall be covered.
                                     </Card.Text>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/cyber">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
