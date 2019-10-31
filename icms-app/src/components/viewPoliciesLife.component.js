@@ -16,8 +16,7 @@ class Policy extends Component {
             <Card.Title as="h5"><b>{this.props.policy.name}</b></Card.Title>
             <Card.Title as= "h6">Description</Card.Title>
             <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in to
-            additional content. This content is a little bit longer.
+            In case of an untimely death of the insured individual, the total benefit is paid to the nominee which can be claimed as a lumpsum or over a duration of time.
             </Card.Text>
             <Card.Title as="h6">Details</Card.Title>
             <Card.Text>
