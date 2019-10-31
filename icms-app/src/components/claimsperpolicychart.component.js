@@ -44,7 +44,7 @@ class ChartsPage extends React.Component {
                       }),
                       datasets : [
                         {
-                            label: "Claims per policy",
+                            label: "Claims per Policy",
                             fill: true,
                             lineTension: 0.3,
                             backgroundColor: "rgba(225, 204,230, .3)",
@@ -78,7 +78,7 @@ class ChartsPage extends React.Component {
   render() {
     return (
       <MDBContainer>
-        <h3 className="mt-5">Claims per policy</h3>
+        <h3 className="mt-5">Claims per Policy</h3>
         <Line data={this.state.dataLine} options={{ responsive: true }} />
       </MDBContainer>
     );
