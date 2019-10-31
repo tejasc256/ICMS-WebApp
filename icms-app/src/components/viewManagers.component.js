@@ -41,10 +41,10 @@ export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {managers: []};
-        
+
     }
 
-    
+
 
     componentDidMount() {
         axios.get('http://localhost:4000/ceo/managers')
@@ -63,8 +63,11 @@ export default class OtherPage extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div>
+            <div style={MyStyle}>
                 <h3>Managers List</h3>
                 <Button variant="primary" href="/manager/create">Create Manager</Button><br/>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
