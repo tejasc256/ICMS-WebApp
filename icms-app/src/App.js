@@ -107,21 +107,6 @@ class App extends Component {
                             <li className="navbar-item">
                                 <Link to="/policies/cyber" className="nav-link">Cyber Insurance</Link>
                             </li>
-                            <li className="navbar-item">
-                                <Link to="/policies/all" className="nav-link">View Policies</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/agent/login" className="nav-link">Agent Login</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/investigator/login" className="nav-link">Investigator Login</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/manager/login" className="nav-link">Manager Login</Link>
-                            </li>
-                            <li className="navbar-item">
-                                <Link to="/ceo/login" className="nav-link">CEO Login</Link>
-                            </li>
                         </ul>
                         <ul class="navbar-nav ml-auto">
                             <li className="navbar-item">

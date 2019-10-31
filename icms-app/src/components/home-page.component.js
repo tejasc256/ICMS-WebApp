@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Carousel, Jumbotron, Button} from 'react-bootstrap';
+import { Carousel, Jumbotron, Button, Container, Row} from 'react-bootstrap';
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import family1 from '../images/family1.jpg';
 import family2 from '../images/family2.jpg';
 
@@ -37,7 +38,7 @@ export default class HomePage extends  Component {
                         <br/>  <br/>
                         In 2018, CCICC was awarded the best insurance and claims company at the Indian Insurance Summit.
                         <br/><br/>
-                        
+
                     </h5>
                     <br/><br/>
                     <p>
@@ -60,6 +61,16 @@ export default class HomePage extends  Component {
                 <Jumbotron style={{textAlign: "center", margin: "0%", backgroundColor: "white", paddingLeft: "7%", paddingRight: "7%"}} fluid>
                     Trade logos displayed above belong to Chaddah Choudhary Insurance and Claim Company and are used by CCICC under a license.
                     Insurance is the subject matter of the solicitation. The advertisement contains only an indication of cover offered. For more details on risk factors, terms, conditions and exclusions, please read the sales brochure carefully before concluding a sale. CCICC, Mega Tower 3, NITK Boys Hostel, National Institute of Technology Karanataka, Surathkal, Karanataka - 575025. Reg. No.250. Phone No: +91 88610 88642
+                    <br/>
+                    <br/>
+                    <Container style={{marginLeft: "31%", marginRight: "auto"}}>
+                        <Row>
+                    <Link to="/agent/login" className="nav-link">Agent Login</Link>
+                    <Link to="/investigator/login" className="nav-link">Investigator Login</Link>
+                    <Link to="/manager/login" className="nav-link">Manager Login</Link>
+                    <Link to="/ceo/login" className="nav-link">CEO Login</Link>
+                        </Row>
+                    </Container>
                 </Jumbotron>
             </div>
         );

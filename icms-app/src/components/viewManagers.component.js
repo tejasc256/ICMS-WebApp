@@ -42,18 +42,24 @@ export default class OtherPage extends  Component {
         super(props);
         this.state = {managers: []};
 
+        this.fetchData = this.fetchData.bind(this);
     }
 
-
-
-    componentDidMount() {
+    fetchData(){
         axios.get('http://localhost:4000/ceo/managers')
             .then(response => {
                 this.setState({ managers: response.data });
             })
             .catch(function (error){
                 console.log(error);
-            }   )
+            });
+    }
+
+
+
+    componentDidMount() {
+        this.fetchData();
+        this.timer = setInterval(() => this.fetchData(), 250);
     }
 
     managerList() {

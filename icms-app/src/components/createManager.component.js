@@ -97,13 +97,15 @@ export default class customerSignUp extends  Component {
                 email: this.state.email,
                 password: this.state.password,
                 firstname: this.state.firstname,
-                lastname: this.state.lastname}, {withCredentials: true}).then(response => {
+                lastname: this.state.lastname,
+                branch: this.state.branch}, {withCredentials: true}).then(response => {
                     console.log('login response', response.data);
                     if(response.data.errno){
                         alert('Email already Exists!');
                     }
                     else{
                         //Show toast
+                        console.log(response);
                         this.props.history.push("/ceo/dashboard");
                     }
                 }).catch(function(err) {
