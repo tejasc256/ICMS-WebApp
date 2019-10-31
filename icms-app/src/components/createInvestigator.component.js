@@ -53,6 +53,9 @@ export default class customerSignUp extends  Component {
         if(!this.state.firstname || !this.state.lastname){
             alert('Please Enter Names');
         }
+        else if(!this.state.email){
+            alert('Enter email');
+        }
         else{
             axios.post('http://localhost:4000/investigator/create', {
                 email: this.state.email,

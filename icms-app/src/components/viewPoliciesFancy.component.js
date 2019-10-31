@@ -74,7 +74,7 @@ export default class OtherPage extends  Component {
                                         </Card.Text>
                         <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/home">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -88,7 +88,7 @@ export default class OtherPage extends  Component {
             <br/>
             <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/health">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -101,7 +101,7 @@ export default class OtherPage extends  Component {
                                         </Card.Text>
             <br/>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/auto">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>
@@ -113,7 +113,7 @@ export default class OtherPage extends  Component {
             In case of a cyber crime such as malware, DoS or ransomeware against the insured individual or their organisation, the damage shall be covered.
                                     </Card.Text>
                                     <div className={cardStyle.reveal} style={{textAlign: "center"}}>
-                                            <Button href="/policies/life">Learn More</Button>
+                                            <Button href="/policies/cyber">Learn More</Button>
                                     </div>
                             </Card.Body>
                         </Card>

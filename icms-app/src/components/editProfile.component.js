@@ -79,7 +79,7 @@ export default class editProfile extends  Component {
 
     onSubmit(e){
         e.preventDefault();
-        if(!this.state.branch){
+        if(!this.state.branch || this.state.branch === 'Choose Branch...'){
             alert('Please Choose Branch');
         }
         else if(this.checkAge() < 18){
