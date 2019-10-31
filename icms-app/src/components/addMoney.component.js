@@ -40,12 +40,17 @@ export default class customerLogin extends  Component {
     onSubmit(e){
         e.preventDefault();
 
-        axios.post('http://localhost:4000/customer/addmoney', {addedmoney: this.state.amount}, {withCredentials: true}).then(response => {
-            console.log('login response', response.data);
-            this.handleClose();
-        }).catch(function(err) {
-            console.log(err);
-        });
+        if(this.state.amount < 0){
+            alert('Enter Positive Value');
+        }
+        else{
+            axios.post('http://localhost:4000/customer/addmoney', {addedmoney: this.state.amount}, {withCredentials: true}).then(response => {
+                console.log('login response', response.data);
+                this.handleClose();
+            }).catch(function(err) {
+                console.log(err);
+            });
+        }
     }
     render(){
         return (

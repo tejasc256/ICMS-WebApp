@@ -40,9 +40,9 @@ export default class customerSignUp extends  Component {
     onSubmit(e){
         e.preventDefault();
 
-        if(this.state.cust_password !== this.state.cust_password2){
+        if(!this.state.cust_password || this.state.cust_password !== this.state.cust_password2){
             this.setState({
-                message: 'Passwords dont match'
+                message: 'Check Passwords'
             });
         }
         else if(!this.state.cust_email){
