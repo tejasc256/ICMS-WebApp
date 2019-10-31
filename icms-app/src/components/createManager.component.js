@@ -13,7 +13,8 @@ export default class customerSignUp extends  Component {
             password: '',
             firstname: '',
             lastname: '',
-            branches: []
+            branches: [],
+            branch: ''
         }
 
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,8 +23,9 @@ export default class customerSignUp extends  Component {
         this.onChangeFirstName = this.onChangeFirstName.bind(this);
         this.onChangeLastName = this.onChangeLastName.bind(this);
         this.populateBranches = this.populateBranches.bind(this);
+        this.onChangeBranch = this.onChangeBranch.bind(this);
     }
-    
+
     componentDidMount(){
         axios.get('http://localhost:4000/branch')
         .then(response => {
@@ -77,27 +79,47 @@ export default class customerSignUp extends  Component {
     onSubmit(e){
         e.preventDefault();
 
-        axios.post('http://localhost:4000/manager/create', {
-            email: this.state.email,
-            password: this.state.password,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname}, {withCredentials: true}).then(response => {
-            console.log('login response', response.data);
-            if(response.data.errno){
-                alert('Email already Exists!');
+        if(!this.state.email){
+            alert('Enter email');
+        }
+        else if(!this.state.password){
+            alert('Password cannot be null');
+        }
+        else if(!this.state.firstname || !this.state.lastname){
+            alert('Enter Name');
+        }
+        else if(!this.state.branch || this.state.branch === 'Choose Branch..'){
+            alert('Choose Branch');
+        }
+        else{
+
+            axios.post('http://localhost:4000/manager/create', {
+                email: this.state.email,
+                password: this.state.password,
+                firstname: this.state.firstname,
+                lastname: this.state.lastname,
+                branch: this.state.branch}, {withCredentials: true}).then(response => {
+                    console.log('login response', response.data);
+                    if(response.data.errno){
+                        alert('Email already Exists!');
+                    }
+                    else{
+                        //Show toast
+                        console.log(response);
+                        this.props.history.push("/ceo/dashboard");
+                    }
+                }).catch(function(err) {
+                    console.log(err);
+                });
             }
-            else{
-                //Show toast
-                this.props.history.push("/manager/dashboard");
-            }
-        }).catch(function(err) {
-            console.log(err);
-        });
-    }
+        }
 
     render(){
+        const myStyle = {
+            marginTop: "50px", width: "50%", marginLeft: "auto", marginRight: "auto"
+        }
         return (
-            <div style={{marginTop: 10}}>
+            <div style={myStyle}>
             <h3>Create Manager</h3>
             <Form>
             <Form.Group controlId="formBasicEmail">
@@ -119,6 +141,7 @@ export default class customerSignUp extends  Component {
             <Form.Group controlId="formGridState">
                 <Form.Label>Branch</Form.Label>
                 <Form.Control as="select" onChange={this.onChangeBranch}>
+                    <option>Choose Branch..</option>
                     {this.populateBranches()}
                 </Form.Control>
             </Form.Group>

@@ -92,7 +92,7 @@ router.post('/manager', function(req, res) {
 });
 
 router.post('/ceo', function(req, res) {
-    if(req.body.email === 'ceo'){
+    if(req.body.email === 'ceo@ccicc.com'){
         if(req.body.password === 'ceo'){
             req.session.ceo_id = 1;
             req.session.ceo = true;

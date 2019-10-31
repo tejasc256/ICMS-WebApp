@@ -64,9 +64,12 @@ export default class ceoDashboard extends  Component {
       }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
             <Router>
-                <div style={{marginTop: 10}}>
+                <div style={MyStyle}>
                    <h3>Reports {this.state.firstname} {this.state.lastname}</h3>
                </div>
                {/* <div>
@@ -101,7 +104,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Customers per Branch</Card.Title>
-                                
+
                                 <Link to="/ceo/customerbranchchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -110,7 +113,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Policices sold per Agent</Card.Title>
-                                
+
                                 <Link to="/ceo/requestsperagentchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -122,7 +125,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Policy</Card.Title>
-                                
+
                                 <Link to="/ceo/claimsperpolicychart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -131,7 +134,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Agents per Manager</Card.Title>
-                                
+
                                 <Link to="/ceo/agentspermanagerchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -140,7 +143,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Branch</Card.Title>
-                                
+
                                 <Link to="/ceo/claimsperbranchchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -152,7 +155,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Customer</Card.Title>
-                                
+
                                 <Link to="/ceo/claimspercustomerchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -161,7 +164,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Claims per Investigator</Card.Title>
-                                
+
                                 <Link to="/ceo/claimsperinvestigatorchart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>
@@ -170,7 +173,7 @@ export default class ceoDashboard extends  Component {
                         <Card style={{ width: '18rem' }}>
                             <Card.Body>
                                 <Card.Title>Requests per Policy</Card.Title>
-                                
+
                                 <Link to="/ceo/requestsperpolicychart" className="nav-link">
                                 <Button variant="primary" onClick={this.scrollToBottom}>View Report</Button>
                                 </Link>

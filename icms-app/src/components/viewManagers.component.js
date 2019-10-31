@@ -41,19 +41,25 @@ export default class OtherPage extends  Component {
     constructor(props){
         super(props);
         this.state = {managers: []};
-        
+
+        this.fetchData = this.fetchData.bind(this);
     }
 
-    
-
-    componentDidMount() {
+    fetchData(){
         axios.get('http://localhost:4000/ceo/managers')
             .then(response => {
                 this.setState({ managers: response.data });
             })
             .catch(function (error){
                 console.log(error);
-            }   )
+            });
+    }
+
+
+
+    componentDidMount() {
+        this.fetchData();
+        this.timer = setInterval(() => this.fetchData(), 250);
     }
 
     managerList() {
@@ -63,8 +69,11 @@ export default class OtherPage extends  Component {
     }
 
     render(){
+        const MyStyle = {
+            width: "70%", marginLeft: "auto", marginRight: "auto", marginTop: "2%"
+        }
         return (
-            <div>
+            <div style={MyStyle}>
                 <h3>Managers List</h3>
                 <Button variant="primary" href="/manager/create">Create Manager</Button><br/>
                 <table className="table table-striped" style={{ marginTop: 20 }} >
