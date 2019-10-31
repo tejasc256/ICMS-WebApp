@@ -63,7 +63,7 @@ componentDidMount() {
 render() {
     return (
     <MDBContainer>
-      <h3 className="mt-5">Claims per branch</h3>
+      <h3 className="mt-5">Claims per Branch</h3>
       <Doughnut data={this.state.dataDoughnut} options={{ responsive: true }} />
     </MDBContainer>
     );

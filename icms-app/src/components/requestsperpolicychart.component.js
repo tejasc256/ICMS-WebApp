@@ -77,7 +77,7 @@ class ChartsPage extends React.Component {
   render() {
     return (
       <MDBContainer>
-        <h3 className="mt-5">Requests per Policy</h3>
+        <h3 className="mt-5">Insurance Requests per Policy</h3>
         <Line data={this.state.dataLine} options={{ responsive: true }} />
       </MDBContainer>
     );

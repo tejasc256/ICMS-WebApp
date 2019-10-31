@@ -9,7 +9,7 @@ class ChartsPage extends React.Component {
       labels: ["Life", "Auto", "Cyber", "Health", "Home"],
       datasets: [
         {
-          label: "Number of Policies",
+          label: "Policies per Type",
           data: [12, 19, 3, 5, 2],
           backgroundColor: [
             "rgba(255, 134,159,0.4)",
@@ -76,7 +76,7 @@ class ChartsPage extends React.Component {
   render() {
     return (
       <MDBContainer>
-        <h3 className="mt-5">Policies</h3>
+        <h3 className="mt-5">Policies by Type</h3>
         <Bar data={this.state.dataBar} options={this.state.barChartOptions} />
       </MDBContainer>
     );
